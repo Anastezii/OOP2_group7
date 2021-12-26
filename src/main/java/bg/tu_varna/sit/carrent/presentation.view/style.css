@@ -1,0 +1,16 @@
+
+/*для фона (картинка) */
+.background-image{
+    -fx-background-image: url("../img/car.jpg");
+    -fx-background-repeat: stretch;
+}
+
+/*для фона (цвет) */
+.top-bar{
+    -fx-background-color : rgba(62, 134,160,0.8);
+}
+/*для кнопок обезвечивание*/
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
