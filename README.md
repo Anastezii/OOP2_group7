@@ -1,1 +1,1 @@
-# OOP2_group7
+# OOP2_group7 - Car Rent
