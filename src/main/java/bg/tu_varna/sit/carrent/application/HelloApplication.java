@@ -24,6 +24,7 @@ public class HelloApplication extends Application {
         PropertyConfigurator.configure(HelloApplication.class.getResource(Constants.Configurations.LOG4J_PROPERTIES));
         URL path=getClass().getResource(Constants.View.HELLO_VIEW);
 
+
         if(path != null){
             Parent root=FXMLLoader.load(path);
 

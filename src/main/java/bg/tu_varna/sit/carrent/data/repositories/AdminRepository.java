@@ -51,16 +51,16 @@ public class AdminRepository implements DAORepositories<Admin>{
 
     @Override
     public void delete(Admin obj) {
-        Session session= Connection.openSession();
+       /* Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
             log.info("Admin was deleted succesfully.");
         }catch (Exception ex){
-            log.error("Admin was deleted, error :("+ex.getMessage());
+            log.error("Admin was deleted, error :("+ex.getCause());
         }finally {
             transaction.commit();
-        }
+        }*/
     }
 
     @Override
@@ -69,7 +69,7 @@ public class AdminRepository implements DAORepositories<Admin>{
         Transaction transaction=session.beginTransaction();
       List<Admin> admins =new LinkedList<Admin>() ;
         try{
-            String jpql="SELECT t FROM Admin t WHERE idADMIN ="+id;
+            String jpql="SELECT t FROM Admin t WHERE admin_id ="+id;
             admins.addAll(session.createQuery(jpql, Admin.class).getResultList());
             log.info("Succesfully get all admins");
 
@@ -93,6 +93,24 @@ public class AdminRepository implements DAORepositories<Admin>{
 
         }catch (Exception ex){
             log.error("Get admins error : "+ex.getMessage());
+        }finally {
+            transaction.commit();
+        }
+        return admins;
+    }
+
+    public List<Admin> getLogin(String login,String pass){
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Admin> admins =new LinkedList<Admin>() ;
+        try{
+            String jpql="SELECT t FROM Admin t WHERE t.admin_login= :login AND t.admin_password= :pass ";
+            admins.addAll(session.createQuery(jpql, Admin.class).setParameter("login",login).
+                    setParameter("pass",pass).getResultList());
+            log.info("Result all admins which matched.");
+
+        }catch (Exception ex){
+            log.error("Get admins error : "+ex.getCause());
         }finally {
             transaction.commit();
         }

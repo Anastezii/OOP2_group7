@@ -7,15 +7,22 @@ import java.util.Set;
 
 @Table(name = "admin")
 @Entity
-
+@DiscriminatorValue("0")
 public class Admin implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    public Admin(String admin_login, String admin_password) {
+        this.admin_login = admin_login;
+        this.admin_password = admin_password;
+    }
+
+    public Admin() { }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name="idADMIN",nullable = false)
+    @Column(name="idADMIN",nullable = false,insertable = false,updatable = false)
     private Long admin_id;
 
     @Column(name="ADMIN_LOGIN",nullable = false)

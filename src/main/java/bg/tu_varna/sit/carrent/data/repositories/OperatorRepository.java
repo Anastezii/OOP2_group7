@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.carrent.data.repositories;
 
 import bg.tu_varna.sit.carrent.data.access.Connection;
+import bg.tu_varna.sit.carrent.data.entities.Admin;
 import bg.tu_varna.sit.carrent.data.entities.Client;
 import bg.tu_varna.sit.carrent.data.entities.Operator;
 import org.apache.log4j.Logger;
@@ -51,7 +52,7 @@ public class OperatorRepository implements DAORepositories<Operator> {
 
     @Override
     public void delete(Operator obj) {
-        Session session= Connection.openSession();
+     /*   Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -60,7 +61,7 @@ public class OperatorRepository implements DAORepositories<Operator> {
             log.error("Operator wasn`t saved , error :("+ ex.getMessage());
         }finally {
             transaction.commit();
-        }
+        }*/
     }
 
     @Override
@@ -69,7 +70,7 @@ public class OperatorRepository implements DAORepositories<Operator> {
         Transaction transaction=session.beginTransaction();
         List<Operator> operators=new LinkedList<Operator>() ;
         try{
-            String jpql="SELECT o FROM Operator o WHERE idOPERATOR ="+id;
+            String jpql="SELECT o FROM Operator o WHERE operator_id ="+id;
             operators.addAll(session.createQuery(jpql,Operator.class).getResultList());
             log.info("Succesfully gets all operators");
 
@@ -93,6 +94,25 @@ public class OperatorRepository implements DAORepositories<Operator> {
 
         }catch (Exception ex){
             log.error("Get operator error : "+ex.getMessage());
+        }finally {
+            transaction.commit();
+        }
+        return operators;
+    }
+
+
+    public List<Operator> getLogin(String login,String pass){
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Operator>operators =new LinkedList<Operator>() ;
+        try{
+            String jpql="SELECT t FROM Operator t WHERE t.operator_login= :login AND t.operator_password= :pass ";
+            operators.addAll(session.createQuery(jpql, Operator.class).setParameter("login",login).
+                    setParameter("pass",pass).  getResultList());
+            log.info("Result all admins which matched.");
+
+        }catch (Exception ex){
+            log.error("Get admins error : "+ex.getCause());
         }finally {
             transaction.commit();
         }

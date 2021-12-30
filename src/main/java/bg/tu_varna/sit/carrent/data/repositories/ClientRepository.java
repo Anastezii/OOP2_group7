@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.carrent.data.repositories;
 import bg.tu_varna.sit.carrent.data.access.Connection;
+import bg.tu_varna.sit.carrent.data.entities.Admin;
 import bg.tu_varna.sit.carrent.data.entities.Client;
 import bg.tu_varna.sit.carrent.data.entities.Operator;
 import org.apache.log4j.Logger;
@@ -13,7 +14,7 @@ import java.util.Optional;
 public class ClientRepository implements DAORepositories<Client> {
     private static final Logger log=Logger.getLogger(ClientRepository.class);
 
-    private static ClientRepository getInstance(){return ClientRepository.ClientRepositoryHolder.INSTANCE;}
+    public static ClientRepository getInstance(){return ClientRepository.ClientRepositoryHolder.INSTANCE;}
 
     private static class ClientRepositoryHolder {
         public static ClientRepository INSTANCE=new ClientRepository();
@@ -51,7 +52,7 @@ public class ClientRepository implements DAORepositories<Client> {
 
     @Override
     public void delete(Client obj) {
-        Session session= Connection.openSession();
+      /*  Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -60,7 +61,7 @@ public class ClientRepository implements DAORepositories<Client> {
             log.error("Client was deleted error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }
+        }*/
     }
 
     @Override
@@ -69,7 +70,7 @@ public class ClientRepository implements DAORepositories<Client> {
         Transaction transaction=session.beginTransaction();
         List<Client> clients=new LinkedList<Client>() ;
         try{
-            String jpql="SELECT cl FROM Client cl WHERE idclient ="+id;
+            String jpql="SELECT cl FROM Client cl WHERE cl_id ="+id;
             clients.addAll(session.createQuery(jpql,Client.class).getResultList());
             log.info("Succesfully gets all clients");
 
@@ -93,6 +94,25 @@ public class ClientRepository implements DAORepositories<Client> {
 
         }catch (Exception ex){
             log.error("Get client error : "+ex.getMessage());
+        }finally {
+            transaction.commit();
+        }
+        return clients;
+    }
+
+
+    public List<Client> getLogin(String login,String pass){
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Client> clients =new LinkedList<Client>() ;
+        try{
+            String jpql="SELECT t FROM Client t WHERE t.cl_login= :login AND t.cl_password= :pass ";
+            clients.addAll(session.createQuery(jpql, Client.class).setParameter("login",login).
+                    setParameter("pass",pass).getResultList());
+            log.info("Result all admins which matched.");
+
+        }catch (Exception ex){
+            log.error("Get admins error : "+ex.getCause());
         }finally {
             transaction.commit();
         }

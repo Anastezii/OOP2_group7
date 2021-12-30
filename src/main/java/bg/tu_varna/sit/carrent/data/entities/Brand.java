@@ -6,6 +6,7 @@ import java.util.Set;
 
 @Table(name = "brand")
 @Entity
+@DiscriminatorValue("0")
 public class Brand  implements Serializable{
     @Serial
     private static final long serialVersionUID = 1L;

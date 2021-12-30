@@ -6,6 +6,7 @@ import java.util.Set;
 
 @Table(name = "smoker")
 @Entity
+@DiscriminatorValue("0")
 public class Smoker implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -13,8 +14,8 @@ public class Smoker implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name="idSMOKER",nullable = false)
-    private Long admin_id;
+    @Column(name="idSMOKER",nullable = false,insertable = false,updatable = false)
+    private Long smoker_id;
 
     @Column(name="SMOKER_TYPE",nullable = false)
     private String admin_login;
@@ -23,12 +24,12 @@ public class Smoker implements Serializable {
     (fetch = FetchType.LAZY, mappedBy = "idSMOKER")
     private Set<Cars> cars;
 
-    public Long getAdmin_id() {
-        return admin_id;
+    public Long getSmoker_id() {
+        return smoker_id;
     }
 
-    public void setAdmin_id(Long admin_id) {
-        this.admin_id = admin_id;
+    public void setSmoker_id(Long smoker_id) {
+        this.smoker_id = smoker_id;
     }
 
     public String getAdmin_login() {
@@ -50,7 +51,7 @@ public class Smoker implements Serializable {
     @Override
     public String toString() {
         return "Smoker{" +
-                "admin_id=" + admin_id +
+                "smoker_id=" +smoker_id +
                 ", admin_login='" + admin_login + '\'' +
                 ", cars=" + cars +
                 '}';

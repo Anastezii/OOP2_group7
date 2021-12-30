@@ -15,7 +15,7 @@ public class UserRepository implements DAORepositories<User>{
 
     private static final Logger log=Logger.getLogger(UserRepository.class);
 
-private static UserRepository getInstance(){return UserRepository.UserRepositoryHolder.INSTANCE;}
+public static UserRepository getInstance(){return UserRepository.UserRepositoryHolder.INSTANCE;}
 
     private static class UserRepositoryHolder {
         public static UserRepository INSTANCE=new UserRepository();
@@ -51,7 +51,7 @@ private static UserRepository getInstance(){return UserRepository.UserRepository
 
     @Override
     public void delete(User obj) {
-        Session session= Connection.openSession();
+       /* Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -60,7 +60,7 @@ private static UserRepository getInstance(){return UserRepository.UserRepository
             log.error("User was deleted error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }
+        }*/
     }
 
     @Override
@@ -69,7 +69,7 @@ private static UserRepository getInstance(){return UserRepository.UserRepository
         Transaction transaction=session.beginTransaction();
         List<User> users=new LinkedList<User>() ;
         try{
-            String jpql="SELECT u FROM User u WHERE iduser ="+id;
+            String jpql="SELECT u FROM User u WHERE id ="+id;
             users.addAll(session.createQuery(jpql,User.class).getResultList());
             log.info("Succesfully gets all users");
 

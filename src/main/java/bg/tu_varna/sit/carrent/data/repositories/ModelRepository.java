@@ -48,7 +48,7 @@ public class ModelRepository implements DAORepositories<Model>{
 
     @Override
     public void delete(Model obj) {
-        Session session= Connection.openSession();
+      /*  Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -57,7 +57,7 @@ public class ModelRepository implements DAORepositories<Model>{
             log.error("Model was delete error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }
+        }*/
     }
 
     @Override
@@ -66,7 +66,7 @@ public class ModelRepository implements DAORepositories<Model>{
         Transaction transaction=session.beginTransaction();
         List<Model> models=new LinkedList<Model>() ;
         try{
-            String jpql="SELECT m FROM Model m WHERE idMODEL ="+id;
+            String jpql="SELECT m FROM Model m WHERE model_id ="+id;
             models.addAll(session.createQuery(jpql,Model.class).getResultList());
             log.info("Succesfully gets all models");
 

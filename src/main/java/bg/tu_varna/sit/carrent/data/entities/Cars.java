@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Set;
 @Table(name = "cars")
 @Entity
+@DiscriminatorValue("0")
 public class Cars implements Serializable{
     @Serial
     private static final long serialVersionUID = 1L;
@@ -19,7 +20,7 @@ public class Cars implements Serializable{
     private String cars_class;
 
     @Column(name="CARS_COLOR",nullable = false)
-    private Long cars_color;
+    private String cars_color;
 
     @Column(name="CARS_REG_NUM",nullable = false)
     private String cars_reg_num;
@@ -40,11 +41,11 @@ public class Cars implements Serializable{
     }
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idMODEL", nullable = false)
+    @JoinColumn(name = "idMODEL", nullable = false,insertable = false,updatable = false)
     private Model idMODEL;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idSMOKER", nullable = false)
+    @JoinColumn(name = "idSMOKER", nullable = false,insertable = false,updatable = false)
     private Smoker idSMOKER;
 
     public Smoker getIdSMOKER() {
@@ -79,11 +80,11 @@ public class Cars implements Serializable{
         this.cars_class = cars_class;
     }
 
-    public Long getCars_color() {
+    public String getCars_color() {
         return cars_color;
     }
 
-    public void setCars_color(Long cars_color) {
+    public void setCars_color(String cars_color) {
         this.cars_color = cars_color;
     }
 

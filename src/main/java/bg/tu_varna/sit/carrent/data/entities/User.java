@@ -15,31 +15,31 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="iduser",nullable = false)
+    @Column(name="iduser",nullable = false,insertable = false,updatable = false)
     private Long id;
 
 
     @Column(name="user_login",nullable = false)
-    private User login;
+    private String login;
 
     @Column(name="user_password",nullable = false)
     private String password;
 
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "iduser_type", nullable = false)
+    @JoinColumn(name = "iduser_type", nullable = false,insertable = false,updatable = false)
     private UserType iduserType;
 
     @ManyToOne
-    @JoinColumn(name = "idADMIN")
+    @JoinColumn(name = "idADMIN",insertable = false,updatable = false)
     private Admin idADMIN;
 
     @ManyToOne
-    @JoinColumn(name = "idOPERATOR")
+    @JoinColumn(name = "idOPERATOR",insertable = false,updatable = false)
     private Operator idOPERATOR;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idclient", nullable = false)
+    @JoinColumn(name = "idclient",insertable = false,updatable = false)
     private Client idclien;
 
     public Client getIdclient() {
@@ -82,12 +82,20 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User getLogin() {
+    public String getLogin() {
         return login;
     }
 
-    public void setLogin(User login) {
+    public void setLogin(String login) {
         this.login = login;
+    }
+
+    public Client getIdclien() {
+        return idclien;
+    }
+
+    public void setIdclien(Client idclien) {
+        this.idclien = idclien;
     }
 
     public String getPassword() {

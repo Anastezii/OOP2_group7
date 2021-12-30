@@ -12,9 +12,9 @@ public class Connection {
 
     static {
         try {
-            sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+            sessionFactory = new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
         } catch (Throwable ex) {
-            log.error("Initial SessionFactory created ruined ! " + ex);
+            log.error("Initial SessionFactory created ruined ! " + ex.getCause());
         }
     }
 

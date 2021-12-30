@@ -49,7 +49,7 @@ public class UserTypeRepository implements DAORepositories<UserType>{
 
     @Override
     public void delete(UserType obj) {
-        Session session= Connection.openSession();
+       /* Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -58,7 +58,7 @@ public class UserTypeRepository implements DAORepositories<UserType>{
             log.error("UserType was delete error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }
+        }*/
     }
 
     @Override
@@ -67,7 +67,7 @@ public class UserTypeRepository implements DAORepositories<UserType>{
         Transaction transaction=session.beginTransaction();
         List<UserType> types=new LinkedList<UserType>() ;
         try{
-            String jpql="SELECT ut FROM UserType ut WHERE idUSER_TYPE ="+id;
+            String jpql="SELECT ut FROM UserType ut WHERE userType_id ="+id;
             types.addAll(session.createQuery(jpql,UserType.class).getResultList());
             log.info("Sucesfully gets all types");
 

@@ -6,6 +6,7 @@ import java.util.Set;
 
 @Table(name = "model")
 @Entity
+@DiscriminatorValue("0")
 public class Model implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -20,7 +21,7 @@ public class Model implements Serializable {
     private String model_name;
 
     @ManyToOne
-    @JoinColumn(name = "idBRAND", nullable = false)
+    @JoinColumn(name = "idBRAND", nullable = false,insertable = false,updatable = false)
     private Brand brand;
 
     @OneToMany

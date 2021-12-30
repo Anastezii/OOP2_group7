@@ -3,18 +3,29 @@ package bg.tu_varna.sit.carrent.data.entities;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Table(name = "operator")
 @Entity
-
+@DiscriminatorValue("0")
 public class Operator implements Serializable {
+
+
     @Serial
     private static final long serialVersionUID = 1L;
 
+    public Operator() { }
+
+    public Operator(String operator_login, String operator_password) {
+        this.operator_login = operator_login;
+        this.operator_password = operator_password;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idOPERATOR",nullable = false)
+    @Column(name="idOPERATOR",nullable = false,insertable = false,updatable = false)
     private Long operator_id;
 
     @Column(name="OPERATOR_LOGIN",nullable = false)
@@ -24,12 +35,9 @@ public class Operator implements Serializable {
     private String operator_password;
 
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="idclient",nullable = false)
-    private Set<Client> clientSet;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idadministr", nullable = false)
+    @JoinColumn(name = "idadministr", nullable = false, insertable = false, updatable = false)
     private Admin idadministr;
 
     @OneToMany
@@ -48,6 +56,17 @@ public class Operator implements Serializable {
     (fetch = FetchType.LAZY, mappedBy = "idOPERATOR")
     private Set<User> users;
 
+    @OneToMany(mappedBy = "oper", orphanRemoval = true)
+    private List<Client> clients = new ArrayList<>();
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
+    }
+
     public Admin getIdadministr() {
         return idadministr;
     }
@@ -56,13 +75,7 @@ public class Operator implements Serializable {
         this.idadministr = idadministr;
     }
 
-    public Set<Client> getClientSet() {
-        return clientSet;
-    }
 
-    public void setClientSet(Set<Client> clientSet) {
-        this.clientSet = clientSet;
-    }
 
 
     public Long getOperator_id() {
@@ -103,7 +116,7 @@ public class Operator implements Serializable {
                 "operator_id=" + operator_id +
                 ", operator_login='" + operator_login + '\'' +
                 ", operator_password='" + operator_password + '\'' +
-                ", clientSet=" + clientSet +
+                ", clientSet=" + clients +
                 ", idadministr=" + idadministr +
                 ", rents=" + rents +
                 ", users=" + users +

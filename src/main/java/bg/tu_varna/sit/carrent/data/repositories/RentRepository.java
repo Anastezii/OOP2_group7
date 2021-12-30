@@ -48,7 +48,7 @@ public class RentRepository implements DAORepositories<Rent>{
 
     @Override
     public void delete(Rent obj) {
-        Session session= Connection.openSession();
+       /* Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -57,7 +57,7 @@ public class RentRepository implements DAORepositories<Rent>{
             log.error("Rent data delete error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }
+        }*/
     }
 
     @Override
@@ -66,7 +66,7 @@ public class RentRepository implements DAORepositories<Rent>{
         Transaction transaction=session.beginTransaction();
         List<Rent> rents=new LinkedList<Rent>() ;
         try{
-            String jpql="SELECT r FROM Rent r WHERE idRENT ="+id;
+            String jpql="SELECT r FROM Rent r WHERE rent_id ="+id;
             rents.addAll(session.createQuery(jpql,Rent.class).getResultList());
             log.info("Succesfully gets all rents data");
 

@@ -48,7 +48,7 @@ public class BrandRepository implements DAORepositories<Brand>{
 
     @Override
     public void delete(Brand obj) {
-        Session session= Connection.openSession();
+        /*Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -57,7 +57,7 @@ public class BrandRepository implements DAORepositories<Brand>{
             log.error("Brand was delete error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }
+        }*/
     }
 
     @Override
@@ -66,7 +66,7 @@ public class BrandRepository implements DAORepositories<Brand>{
         Transaction transaction=session.beginTransaction();
         List<Brand> brands=new LinkedList<Brand>() ;
         try{
-            String jpql="SELECT b FROM Brand b WHERE idBRAND ="+id;
+            String jpql="SELECT b FROM Brand b WHERE brand_id ="+id;
             brands.addAll(session.createQuery(jpql,Brand.class).getResultList());
             log.info("Succesfully gets all brands");
 

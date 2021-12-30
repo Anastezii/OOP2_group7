@@ -48,7 +48,7 @@ public class SmokerRepository implements DAORepositories<Smoker>{
 
     @Override
     public void delete(Smoker obj) {
-        Session session= Connection.openSession();
+        /*Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -57,7 +57,7 @@ public class SmokerRepository implements DAORepositories<Smoker>{
             log.error("Smoker was delete error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }
+        }*/
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SmokerRepository implements DAORepositories<Smoker>{
         Transaction transaction=session.beginTransaction();
         List<Smoker> smokers=new LinkedList<Smoker>() ;
         try{
-            String jpql="SELECT s FROM Smoker s WHERE idSMOKER ="+id;
+            String jpql="SELECT s FROM Smoker s WHERE smoker_id ="+id;
             smokers.addAll(session.createQuery(jpql,Smoker.class).getResultList());
             log.info("Succesfully gets all smokers cars");
 

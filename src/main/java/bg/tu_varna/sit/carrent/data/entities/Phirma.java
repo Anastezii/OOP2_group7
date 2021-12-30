@@ -6,6 +6,7 @@ import java.util.Set;
 
 @Table(name = "phirma")
 @Entity
+@DiscriminatorValue("0")
 public class Phirma implements Serializable{
     @Serial
     private static final long serialVersionUID = 1L;
@@ -21,7 +22,7 @@ public class Phirma implements Serializable{
 
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idad", nullable = false)
+    @JoinColumn(name = "idad", nullable = false,insertable = false,updatable = false)
     private Admin idad;
 
     @OneToMany

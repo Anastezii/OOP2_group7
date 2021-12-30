@@ -48,7 +48,7 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
 
     @Override
     public void delete(Phirma obj) {
-        Session session= Connection.openSession();
+      /*  Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -57,7 +57,7 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
             log.error("Phirma was delete error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }
+        }*/
     }
 
     @Override
@@ -66,7 +66,7 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
         Transaction transaction=session.beginTransaction();
         List<Phirma> phirmas=new LinkedList<Phirma>() ;
         try{
-            String jpql="SELECT p FROM Phirma p WHERE idPhirma ="+id;
+            String jpql="SELECT p FROM Phirma p WHERE ph_id ="+id;
             phirmas.addAll(session.createQuery(jpql,Phirma.class).getResultList());
             log.info("Succesfully gets  all phirmas");
 

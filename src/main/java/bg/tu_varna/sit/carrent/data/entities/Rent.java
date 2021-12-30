@@ -1,12 +1,16 @@
 package bg.tu_varna.sit.carrent.data.entities;
+import javafx.scene.input.DataFormat;
+
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 @Table(name = "rent")
 @Entity
+@DiscriminatorValue("0")
 public class Rent implements Serializable{
     @Serial
     private static final long serialVersionUID = 1L;
@@ -14,27 +18,27 @@ public class Rent implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name="idRENT",nullable = false)
+    @Column(name="idRENT",nullable = false,insertable = false,updatable = false)
     private Long rent_id;
 
     @Column(name="RENT_date",nullable = false)
-    private DateTimeFormatter rent_date;
+    private LocalDate rent_date;
 
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idCARS", nullable = false)
+    @JoinColumn(name = "idCARS", nullable = false,insertable = false,updatable = false)
     private Cars idCARS;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idoper", nullable = false)
+    @JoinColumn(name = "idoper", nullable = false,insertable = false,updatable = false)
     private Operator idoper;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idcl", nullable = false)
+    @JoinColumn(name = "idcl", nullable = false,insertable = false,updatable = false)
     private Client idcl;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idph", nullable = false)
+    @JoinColumn(name = "idph", nullable = false,insertable = false,updatable = false)
     private Phirma idph;
 
     public Phirma getIdph() {
@@ -77,11 +81,11 @@ public class Rent implements Serializable{
         this.rent_id = rent_id;
     }
 
-    public DateTimeFormatter getRent_date() {
+    public LocalDate getRent_date() {
         return rent_date;
     }
 
-    public void setRent_date(DateTimeFormatter rent_date) {
+    public void setRent_date(LocalDate rent_date) {
         this.rent_date = rent_date;
     }
 

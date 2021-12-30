@@ -2,18 +2,16 @@ package bg.tu_varna.sit.carrent.presentation.models;
 
 
 public class OperatorListViewModel {
-    private final String summary;
-    private final String admin;
+    private final String log;
+    private final String pass;
 
-    public OperatorListViewModel(String summary,  String admin) {
-        this.summary = summary;
-        this.admin = admin;
+    public OperatorListViewModel(String log, String pass) {
+        this.log = log;
+        this.pass = pass;
     }
-
-
 
     @Override
     public String toString() {
-        return String.format(" %s  | %s ",summary,admin );
+        return String.format(" %s  | %s ",log,pass );
     }
 }
