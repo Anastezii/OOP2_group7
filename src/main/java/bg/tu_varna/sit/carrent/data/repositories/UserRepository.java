@@ -1,7 +1,6 @@
 package bg.tu_varna.sit.carrent.data.repositories;
 
 import bg.tu_varna.sit.carrent.data.access.Connection;
-import bg.tu_varna.sit.carrent.data.entities.Client;
 import bg.tu_varna.sit.carrent.data.entities.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -9,7 +8,6 @@ import org.hibernate.Transaction;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 public class UserRepository implements DAORepositories<User>{
 
@@ -33,6 +31,7 @@ public static UserRepository getInstance(){return UserRepository.UserRepositoryH
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
@@ -47,11 +46,12 @@ public static UserRepository getInstance(){return UserRepository.UserRepositoryH
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
     public void delete(User obj) {
-       /* Session session= Connection.openSession();
+       Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -60,7 +60,8 @@ public static UserRepository getInstance(){return UserRepository.UserRepositoryH
             log.error("User was deleted error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }*/
+        }
+        session.close();
     }
 
     @Override
@@ -78,6 +79,7 @@ public static UserRepository getInstance(){return UserRepository.UserRepositoryH
         }finally {
             transaction.commit();
         }
+        session.close();
         return users;
     }
 
@@ -96,6 +98,7 @@ public static UserRepository getInstance(){return UserRepository.UserRepositoryH
         }finally {
             transaction.commit();
         }
+        session.close();
         return users;
     }
 

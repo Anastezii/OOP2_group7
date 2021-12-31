@@ -2,14 +2,12 @@ package bg.tu_varna.sit.carrent.data.repositories;
 
 import bg.tu_varna.sit.carrent.data.access.Connection;
 import bg.tu_varna.sit.carrent.data.entities.Admin;
-import bg.tu_varna.sit.carrent.data.entities.Client;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 public class AdminRepository implements DAORepositories<Admin>{
 
@@ -33,6 +31,7 @@ public class AdminRepository implements DAORepositories<Admin>{
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
@@ -47,11 +46,12 @@ public class AdminRepository implements DAORepositories<Admin>{
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
     public void delete(Admin obj) {
-       /* Session session= Connection.openSession();
+        Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -60,7 +60,8 @@ public class AdminRepository implements DAORepositories<Admin>{
             log.error("Admin was deleted, error :("+ex.getCause());
         }finally {
             transaction.commit();
-        }*/
+        }
+        session.close();
     }
 
     @Override
@@ -77,7 +78,8 @@ public class AdminRepository implements DAORepositories<Admin>{
             log.error("Get ig admins error : "+ex.getMessage());
         }finally {
             transaction.commit();
-        }session.close();
+        }
+        session.close();
         return admins;
     }
 
@@ -96,6 +98,7 @@ public class AdminRepository implements DAORepositories<Admin>{
         }finally {
             transaction.commit();
         }
+        session.close();
         return admins;
     }
 
@@ -114,6 +117,7 @@ public class AdminRepository implements DAORepositories<Admin>{
         }finally {
             transaction.commit();
         }
+        session.close();
         return admins;
     }
 }

@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
+
 public class RentRepository implements DAORepositories<Rent>{
 
     private static final Logger log=Logger.getLogger(RentRepository.class);
@@ -30,6 +30,7 @@ public class RentRepository implements DAORepositories<Rent>{
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
@@ -44,11 +45,12 @@ public class RentRepository implements DAORepositories<Rent>{
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
     public void delete(Rent obj) {
-       /* Session session= Connection.openSession();
+        Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -57,7 +59,8 @@ public class RentRepository implements DAORepositories<Rent>{
             log.error("Rent data delete error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }*/
+        }
+        session.close();
     }
 
     @Override
@@ -75,6 +78,7 @@ public class RentRepository implements DAORepositories<Rent>{
         }finally {
             transaction.commit();
         }
+        session.close();
         return rents;
     }
 
@@ -93,6 +97,7 @@ public class RentRepository implements DAORepositories<Rent>{
         }finally {
             transaction.commit();
         }
+        session.close();
         return rents;
     }
 }

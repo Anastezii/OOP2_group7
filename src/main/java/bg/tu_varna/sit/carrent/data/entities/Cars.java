@@ -11,7 +11,7 @@ public class Cars implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
 
     @Column(name="idCARS",nullable = false)
     private Long cars_id;

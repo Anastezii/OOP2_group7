@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
+
 public class BrandRepository implements DAORepositories<Brand>{
 
     private static final Logger log=Logger.getLogger(BrandRepository.class);
@@ -30,6 +30,7 @@ public class BrandRepository implements DAORepositories<Brand>{
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
@@ -44,11 +45,12 @@ public class BrandRepository implements DAORepositories<Brand>{
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
     public void delete(Brand obj) {
-        /*Session session= Connection.openSession();
+        Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -57,7 +59,8 @@ public class BrandRepository implements DAORepositories<Brand>{
             log.error("Brand was delete error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }*/
+        }
+        session.close();
     }
 
     @Override
@@ -75,6 +78,7 @@ public class BrandRepository implements DAORepositories<Brand>{
         }finally {
             transaction.commit();
         }
+        session.close();
         return brands;
     }
 
@@ -93,6 +97,7 @@ public class BrandRepository implements DAORepositories<Brand>{
         }finally {
             transaction.commit();
         }
+        session.close();
         return brands;
     }
 }

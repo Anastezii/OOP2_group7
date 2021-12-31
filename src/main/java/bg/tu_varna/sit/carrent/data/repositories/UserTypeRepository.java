@@ -1,16 +1,13 @@
 package bg.tu_varna.sit.carrent.data.repositories;
 import bg.tu_varna.sit.carrent.data.access.Connection;
-import bg.tu_varna.sit.carrent.data.entities.Admin;
-import bg.tu_varna.sit.carrent.data.entities.Client;
-import bg.tu_varna.sit.carrent.data.entities.Operator;
-import bg.tu_varna.sit.carrent.data.entities.UserType;
+import bg.tu_varna.sit.carrent.data.entities.*;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
+
 public class UserTypeRepository implements DAORepositories<UserType>{
     private static final Logger log=Logger.getLogger(UserTypeRepository.class);
 
@@ -31,6 +28,7 @@ public class UserTypeRepository implements DAORepositories<UserType>{
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
@@ -45,11 +43,12 @@ public class UserTypeRepository implements DAORepositories<UserType>{
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
     public void delete(UserType obj) {
-       /* Session session= Connection.openSession();
+        Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -58,7 +57,8 @@ public class UserTypeRepository implements DAORepositories<UserType>{
             log.error("UserType was delete error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }*/
+        }
+        session.close();
     }
 
     @Override
@@ -76,6 +76,7 @@ public class UserTypeRepository implements DAORepositories<UserType>{
         }finally {
             transaction.commit();
         }
+        session.close();
         return types;
     }
 
@@ -94,6 +95,7 @@ public class UserTypeRepository implements DAORepositories<UserType>{
         }finally {
             transaction.commit();
         }
+        session.close();
         return types;
     }
 }

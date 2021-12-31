@@ -11,8 +11,14 @@ public class Phirma implements Serializable{
     @Serial
     private static final long serialVersionUID = 1L;
 
+    public Phirma() { }
+
+    public Phirma(String ph_name) {
+        this.ph_name = ph_name;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
 
     @Column(name="idPhirma",nullable = false)
     private Long ph_id;

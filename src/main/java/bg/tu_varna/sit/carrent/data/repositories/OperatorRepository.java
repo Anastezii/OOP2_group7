@@ -1,8 +1,6 @@
 package bg.tu_varna.sit.carrent.data.repositories;
 
 import bg.tu_varna.sit.carrent.data.access.Connection;
-import bg.tu_varna.sit.carrent.data.entities.Admin;
-import bg.tu_varna.sit.carrent.data.entities.Client;
 import bg.tu_varna.sit.carrent.data.entities.Operator;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -10,7 +8,6 @@ import org.hibernate.Transaction;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 public class OperatorRepository implements DAORepositories<Operator> {
 
@@ -30,10 +27,11 @@ public class OperatorRepository implements DAORepositories<Operator> {
             session.save(obj);
             log.info("Operator was saved succesfully.");
         }catch (Exception ex){
-            log.error("Operator wasn`t saved , error :("+ ex.getMessage());
+            log.error("Operator wasn`t saved , error :("+ ex.getCause());
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
@@ -44,24 +42,26 @@ public class OperatorRepository implements DAORepositories<Operator> {
             session.update(obj);
             log.info("Operator was saved succesfully.");
         }catch (Exception ex){
-            log.error("Operator wasn`t saved , error :("+ ex.getMessage());
+            log.error("Operator wasn`t saved , error :("+ ex.getCause());
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
     public void delete(Operator obj) {
-     /*   Session session= Connection.openSession();
+        Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
             log.info("Operator was saved succesfully.");
         }catch (Exception ex){
-            log.error("Operator wasn`t saved , error :("+ ex.getMessage());
+            log.error("Operator wasn`t saved , error :("+ ex.getCause());
         }finally {
             transaction.commit();
-        }*/
+        }
+        session.close();
     }
 
     @Override
@@ -75,10 +75,11 @@ public class OperatorRepository implements DAORepositories<Operator> {
             log.info("Succesfully gets all operators");
 
         }catch (Exception ex){
-            log.error("Get ig operator error : "+ex.getMessage());
+            log.error("Get ig operator error : "+ex.getCause());
         }finally {
             transaction.commit();
         }
+        session.close();
         return operators;
     }
 
@@ -93,10 +94,11 @@ public class OperatorRepository implements DAORepositories<Operator> {
             log.info("Result all operators");
 
         }catch (Exception ex){
-            log.error("Get operator error : "+ex.getMessage());
+            log.error("Get operator error : "+ex.getCause());
         }finally {
             transaction.commit();
         }
+        session.close();
         return operators;
     }
 
@@ -116,6 +118,7 @@ public class OperatorRepository implements DAORepositories<Operator> {
         }finally {
             transaction.commit();
         }
+        session.close();
         return operators;
     }
 

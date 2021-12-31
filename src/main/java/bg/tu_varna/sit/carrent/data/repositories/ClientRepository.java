@@ -1,15 +1,12 @@
 package bg.tu_varna.sit.carrent.data.repositories;
 import bg.tu_varna.sit.carrent.data.access.Connection;
-import bg.tu_varna.sit.carrent.data.entities.Admin;
 import bg.tu_varna.sit.carrent.data.entities.Client;
-import bg.tu_varna.sit.carrent.data.entities.Operator;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 public class ClientRepository implements DAORepositories<Client> {
     private static final Logger log=Logger.getLogger(ClientRepository.class);
@@ -34,6 +31,7 @@ public class ClientRepository implements DAORepositories<Client> {
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
@@ -48,11 +46,12 @@ public class ClientRepository implements DAORepositories<Client> {
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
     public void delete(Client obj) {
-      /*  Session session= Connection.openSession();
+       Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -61,7 +60,8 @@ public class ClientRepository implements DAORepositories<Client> {
             log.error("Client was deleted error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }*/
+        }
+        session.close();
     }
 
     @Override
@@ -79,6 +79,7 @@ public class ClientRepository implements DAORepositories<Client> {
         }finally {
             transaction.commit();
         }
+        session.close();
         return clients;
     }
 
@@ -97,6 +98,7 @@ public class ClientRepository implements DAORepositories<Client> {
         }finally {
             transaction.commit();
         }
+        session.close();
         return clients;
     }
 
@@ -116,6 +118,7 @@ public class ClientRepository implements DAORepositories<Client> {
         }finally {
             transaction.commit();
         }
+        session.close();
         return clients;
     }
 }

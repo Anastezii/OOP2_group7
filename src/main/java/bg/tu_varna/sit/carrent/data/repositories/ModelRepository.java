@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
+
 public class ModelRepository implements DAORepositories<Model>{
 
     private static final Logger log=Logger.getLogger(ModelRepository.class);
@@ -30,6 +30,7 @@ public class ModelRepository implements DAORepositories<Model>{
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
@@ -44,11 +45,12 @@ public class ModelRepository implements DAORepositories<Model>{
         }finally {
             transaction.commit();
         }
+        session.close();
     }
 
     @Override
     public void delete(Model obj) {
-      /*  Session session= Connection.openSession();
+        Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         try {
             session.delete(obj);
@@ -57,7 +59,8 @@ public class ModelRepository implements DAORepositories<Model>{
             log.error("Model was delete error :("+ex.getMessage());
         }finally {
             transaction.commit();
-        }*/
+        }
+        session.close();
     }
 
     @Override
@@ -75,6 +78,7 @@ public class ModelRepository implements DAORepositories<Model>{
         }finally {
             transaction.commit();
         }
+        session.close();
         return models;
     }
 
@@ -93,6 +97,7 @@ public class ModelRepository implements DAORepositories<Model>{
         }finally {
             transaction.commit();
         }
+        session.close();
         return models;
     }
 }
