@@ -4,6 +4,7 @@ import bg.tu_varna.sit.carrent.business.services.AdminService;
 import bg.tu_varna.sit.carrent.business.services.PhirmaService;
 import bg.tu_varna.sit.carrent.data.entities.Admin;
 import bg.tu_varna.sit.carrent.data.entities.Phirma;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -28,6 +30,7 @@ import java.net.URL;
 public class CreatePhirmaController {
 
     private final PhirmaService service = PhirmaService.getInstance();
+    private final AdminService serviceAdmin = AdminService.getInstance();
 
 @FXML
     public TextField ComponyName;
@@ -36,13 +39,16 @@ public class CreatePhirmaController {
     @FXML
     public Button BackButton;
 
+
     @FXML
     public void initialize() {
+
         CreatePhirma.setOnMouseClicked(this::handle);
         BackButton.setOnMouseClicked(this::handle1);
     }
     public void handle(Event event) {
-        boolean Save=false;
+
+        //String adminAcc=comboBox.getSelectionMojkdel().toString();
         String phirma = ComponyName.getText().trim();
         service.SavePhirma(phirma);
         infobox();

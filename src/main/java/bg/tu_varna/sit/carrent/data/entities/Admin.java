@@ -42,6 +42,9 @@ public class Admin implements Serializable {
             (fetch = FetchType.LAZY, mappedBy =  "idad")
     private Set<Phirma> phirmaSet;
 
+    public Admin(String admin_login) { this.admin_login = admin_login;
+    }
+
     public Set<Phirma> getPhirmaSet() {
         return phirmaSet;
     }

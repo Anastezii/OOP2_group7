@@ -52,6 +52,12 @@ public class AdminService {
                o.getAdmin_password())).collect(Collectors.toList()));
 
     }
+   /* public ObservableList<Admin> getAdmin(){
+        List<Admin> admins=repository.getAdminLogin();
+        return FXCollections.observableList(admins.stream().map(o->new Admin(o.getAdmin_login())).
+                collect(Collectors.toList()));
+
+    }*/
 
      /*public ResultSet getAdmin(Admin admin){
         ResultSet resSet=null;

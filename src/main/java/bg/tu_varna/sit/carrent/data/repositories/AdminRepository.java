@@ -120,4 +120,21 @@ public class AdminRepository implements DAORepositories<Admin>{
         session.close();
         return admins;
     }
+   /* public List<Admin> getAdminLogin() {
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Admin> admins =new LinkedList<Admin>() ;
+        try{
+            String jpql="SELECT  FROM Admin ";
+            admins.addAll(session.createQuery(jpql, Admin.class).getResultList());
+            log.info("Succesfully get all admins");
+
+        }catch (Exception ex){
+            log.error("Get ig admins error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+        }
+        session.close();
+        return admins;
+    }*/
 }

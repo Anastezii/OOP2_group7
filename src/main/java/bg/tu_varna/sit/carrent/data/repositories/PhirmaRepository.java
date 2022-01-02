@@ -101,4 +101,23 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
         session.close();
         return phirmas;
     }
+    public List<Phirma> getAdminLogin(String admin) {
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Phirma> admins =new LinkedList<Phirma>() ;
+        try{
+            String jpql="SELECT p FROM Phirma p WHERE p.idad=:admin";
+            admins.addAll(session.createQuery(jpql, Phirma.class).setParameter("admin",admin).
+                    getResultList());
+            log.info("Succesfully get all admins");
+
+        }catch (Exception ex){
+            log.error("Get ig admins error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+        }
+        session.close();
+        return admins;
+    }
+
 }
