@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/14"
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/14"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="bg.tu_varna.sit.carrent.presentation.controlers.CreatePhirmaController">
    <children>
       <Label layoutX="190.0" layoutY="45.0" text="You pressed button for create a compony" />
       <TextField fx:id="ComponyName" layoutX="337.0" layoutY="116.0" />
       <Label layoutX="113.0" layoutY="120.0" prefHeight="17.0" prefWidth="188.0" text="Please enter compony name" />
-      <Button fx:id="CreatePhirma" layoutX="239.0" layoutY="184.0" mnemonicParsing="false"
-              onAction="#handle" prefHeight="46.0" prefWidth="149.0" text="Create Compony" />
-      <Button fx:id="BackButton" layoutX="239.0" layoutY="248.0" mnemonicParsing="false"
-              prefHeight="46.0" prefWidth="149.0" text="Back"  onAction="#handle1"/>
+      <Button fx:id="CreatePhirma" layoutX="239.0" layoutY="220.0" mnemonicParsing="false" onAction="#handle" prefHeight="46.0" prefWidth="149.0" text="Create Compony" />
+      <Button fx:id="BackButton" layoutX="239.0" layoutY="288.0" mnemonicParsing="false" onAction="#handle1" prefHeight="46.0" prefWidth="149.0" text="Back" />
+
+
    </children>
 </AnchorPane>
