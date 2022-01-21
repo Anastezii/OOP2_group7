@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.carrent.presentation.controlers.AddCarController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #b0c4de;">
+         <children>
+            <Label layoutX="203.0" layoutY="61.0" text="You pressed button for add a new car">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Brand" layoutX="226.0" layoutY="124.0" />
+            <Label layoutX="59.0" layoutY="128.0" text="Please enter a brand">
+               <font>
+                  <Font name="Berlin Sans FB" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Model" layoutX="226.0" layoutY="160.0" />
+            <Label layoutX="59.0" layoutY="164.0" text="PLease enter a model">
+               <font>
+                  <Font name="Berlin Sans FB" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Color" layoutX="226.0" layoutY="316.0" />
+            <TextField fx:id="Year" layoutX="226.0" layoutY="279.0" />
+            <TextField fx:id="Class" layoutX="226.0" layoutY="239.0" />
+            <TextField fx:id="Smoker" layoutX="226.0" layoutY="200.0" />
+            <Label layoutX="59.0" layoutY="204.0" text="PLease enter a smoker type ">
+               <font>
+                  <Font name="Berlin Sans FB" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="59.0" layoutY="243.0" text="PLease enter a car-class">
+               <font>
+                  <Font name="Berlin Sans FB" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="59.0" layoutY="283.0" text="PLease enter a car year">
+               <font>
+                  <Font name="Berlin Sans FB" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="59.0" layoutY="320.0" text="PLease enter a car color">
+               <font>
+                  <Font name="Berlin Sans FB" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="RegNum" layoutX="226.0" layoutY="353.0" />
+            <Label layoutX="57.0" layoutY="357.0" text="PLease enter a reg number">
+               <font>
+                  <Font name="Berlin Sans FB" size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="AddCarButton" layoutX="428.0" layoutY="161.0" mnemonicParsing="false" onAction="#handle" prefHeight="48.0" prefWidth="147.0" style="-fx-background-color: #b0c4de;" text="Add">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="BackButton" layoutX="400.0" layoutY="296.0" mnemonicParsing="false" onAction="#handle1" prefHeight="48.0" prefWidth="180.0" style="-fx-background-color: #b0c4de;" text="Back">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="TableButton" layoutX="405.0" layoutY="227.0" mnemonicParsing="false" onAction="#handle2" prefHeight="48.0" prefWidth="187.0" style="-fx-background-color: #b0c4de;" text="Table Cars">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="48.0" fitWidth="60.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/admin-with-cogwheels.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="21.0" fitWidth="23.0" layoutX="455.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/plus.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="37.0" layoutX="434.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/tablet.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="35.0" layoutX="521.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/return.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

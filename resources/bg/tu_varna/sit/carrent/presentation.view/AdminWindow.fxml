@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.carrent.presentation.controlers.AdminWindowController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #b0c4de;">
+      
+      
+              <Text text="Welcome" />
+              <Label alignment="CENTER" layoutX="225.0" layoutY="82.0" text="Hello Admin" textAlignment="CENTER">
+            <font>
+               <Font name="Berlin Sans FB" size="18.0" />
+            </font>
+         </Label>
+              <Label layoutX="195.0" layoutY="130.0" text="What do you want to do ? ">
+            <opaqueInsets>
+               <Insets bottom="50.0" right="20.0" />
+            </opaqueInsets>
+            <font>
+               <Font name="Berlin Sans FB" size="14.0" />
+            </font>
+         </Label>
+      
+              <Button fx:id="buttonCreatePhirma" layoutX="196.0" layoutY="160.0" mnemonicParsing="false" onAction="#handle" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: #b0c4de;" text="Create company">
+            <font>
+               <Font name="Berlin Sans FB" size="13.0" />
+            </font>
+         </Button>
+              <Button fx:id="buttonCreateOper" layoutX="192.0" layoutY="217.0" mnemonicParsing="false" onAction="#handle1" prefHeight="35.0" prefWidth="193.0" style="-fx-background-color: #b0c4de;" text="Create operator">
+            <font>
+               <Font name="Berlin Sans FB" size="13.0" />
+            </font>
+         </Button>
+         <Button fx:id="buttonAddCar" layoutX="195.0" layoutY="268.0" mnemonicParsing="false" onAction="#handle2" prefHeight="35.0" prefWidth="175.0" style="-fx-background-color: #b0c4de;" text="Add car">
+            <font>
+               <Font name="Berlin Sans FB" size="13.0" />
+            </font>
+         </Button>
+         <Button fx:id="StartPage" layoutX="370.0" layoutY="330.0" mnemonicParsing="false" onAction="#handle3" prefHeight="49.0" prefWidth="221.0" style="-fx-background-color: #b0c4de;" text="Return to start page">
+            <font>
+               <Font name="Berlin Sans FB" size="13.0" />
+            </font>
+         </Button>
+         <ImageView fitHeight="67.0" fitWidth="79.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../img/admin-with-cogwheels.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="21.0" fitWidth="28.0" layoutX="218.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../img/plus.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="218.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../img/add-user.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="35.0" fitWidth="27.0" layoutX="215.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../img/car.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="27.0" fitWidth="50.0" layoutX="543.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../img/return.png" />
+            </image>
+         </ImageView>
+      
+      
+      
+      </AnchorPane>
+   </children>
+</HBox>

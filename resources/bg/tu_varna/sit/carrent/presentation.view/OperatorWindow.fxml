@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.carrent.presentation.controlers.OperatorWindowController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #b0c4de;">
+          <Text text="Welcome" />
+          <Label layoutX="244.0" layoutY="82.0" text="Hello Operator">
+            <font>
+               <Font name="Berlin Sans FB" size="18.0" />
+            </font>
+         </Label>
+      
+          <Button fx:id="buttonAddClient" layoutX="175.0" layoutY="167.0" mnemonicParsing="false" onAction="#handle" prefHeight="52.0" prefWidth="276.0" style="-fx-background-color: #b0c4de;" text="Add Client">
+            <font>
+               <Font name="Berlin Sans FB" size="14.0" />
+            </font>
+         </Button>
+         <Label layoutX="143.0" layoutY="121.0" text="What do you want to do..Please choose">
+            <font>
+               <Font name="Berlin Sans FB" size="18.0" />
+            </font>
+         </Label>
+         <Button fx:id="buttonAddRent" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" onAction="#handle1" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #b0c4de;" text="Add rent for client">
+            <font>
+               <Font name="Berlin Sans FB" size="14.0" />
+            </font>
+         </Button>
+         <Button fx:id="StartPage" layoutX="324.0" layoutY="320.0" mnemonicParsing="false" onAction="#handle2" prefHeight="52.0" prefWidth="268.0" style="-fx-background-color: #b0c4de;" text="Return to Start Page">
+            <font>
+               <Font name="Berlin Sans FB" size="14.0" />
+            </font>
+         </Button>
+         <ImageView fitHeight="52.0" fitWidth="67.0" layoutX="14.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../img/help-operator.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="28.0" fitWidth="35.0" layoutX="230.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../img/add-user.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="37.0" fitWidth="36.0" layoutX="197.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../img/key.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="28.0" fitWidth="36.0" layoutX="534.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../img/return.png" />
+            </image>
+         </ImageView>
+      
+      
+      </AnchorPane>
+   </children>
+</HBox>

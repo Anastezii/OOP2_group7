@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/car_rent</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">Student19621833</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>     <!--        or create-drop -->
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        <property name="show_sql">true</property>
+
+        <mapping class="bg.tu_varna.sit.carrent.data.entities.User" />
+        <mapping class="bg.tu_varna.sit.carrent.data.entities.Admin" />
+        <mapping class="bg.tu_varna.sit.carrent.data.entities.Operator" />
+        <mapping class="bg.tu_varna.sit.carrent.data.entities.Client" />
+        <mapping class="bg.tu_varna.sit.carrent.data.entities.Phirma" />
+        <mapping class="bg.tu_varna.sit.carrent.data.entities.Brand" />
+        <mapping class="bg.tu_varna.sit.carrent.data.entities.Model" />
+        <mapping class="bg.tu_varna.sit.carrent.data.entities.Smoker" />
+        <mapping class="bg.tu_varna.sit.carrent.data.entities.Cars" />
+        <mapping class="bg.tu_varna.sit.carrent.data.entities.Rent" />
+        <mapping class="bg.tu_varna.sit.carrent.data.entities.UserType" />
+
+    </session-factory>
+</hibernate-configuration>
