@@ -7,9 +7,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #b0c4de;"
+<AnchorPane prefHeight="411.0" prefWidth="600.0" style="-fx-background-color: #b0c4de;"
             xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.carrent.presentation.controlers.AddOperatorController">
    <children>
       <Label layoutX="190.0" layoutY="66.0" text="You pressed button for add an operator">
@@ -19,7 +19,7 @@
       </Label>
       <TextField fx:id="Operatorlogin" layoutX="249.0" layoutY="154.0" />
       <TextField fx:id="OperatorPass" layoutX="249.0" layoutY="200.0" />
-      <Label layoutX="23.0" layoutY="158.0" text="Please enter an operator login  ">
+      <Label layoutX="23.0" layoutY="158.0" text="Please enter an operator name  ">
          <font>
             <Font name="Berlin Sans FB" size="14.0" />
          </font>
@@ -64,5 +64,23 @@
             <Image url="@../img/return.png" />
          </image>
       </ImageView>
+      <TextField fx:id="AdminName" layoutX="249.0" layoutY="241.0" />
+      <Text layoutX="23.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please input your name">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="UserName" layoutX="249.0" layoutY="279.0" />
+      <TextField fx:id="UserPass" layoutX="249.0" layoutY="323.0" />
+      <Text layoutX="24.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLease input username">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="25.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLease input password for login">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

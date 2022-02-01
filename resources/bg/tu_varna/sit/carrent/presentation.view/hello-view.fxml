@@ -9,8 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="551.0" prefWidth="586.0" style="-fx-background-color: #b0c4de;"
+<AnchorPane id="ExitButton" prefHeight="551.0" prefWidth="586.0" style="-fx-background-color: #b0c4de;"
             xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.carrent.presentation.controlers.HelloController">
    <children>
       <ImageView fitHeight="143.0" fitWidth="222.0" layoutX="161.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
@@ -71,6 +70,16 @@
       <ImageView fitHeight="54.0" fitWidth="55.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/car-rental.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="ExitButton" layoutX="441.0" layoutY="425.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="116.0" style="-fx-background-color: #b0c4de;" text="Exit" onAction="#exitWindow">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="453.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/exit.png" />
          </image>
       </ImageView>
    </children>

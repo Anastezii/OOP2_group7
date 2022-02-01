@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #b0c4de;"
             xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.carrent.presentation.controlers.CreatePhirmaController">
    <children>
@@ -58,6 +57,12 @@
             <Image url="@../img/return.png" />
          </image>
       </ImageView>
+      <TextField fx:id="username" layoutX="340.0" layoutY="159.0" />
+      <Label layoutX="113.0" layoutY="159.0" text="Please input your name">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
 
       
    </children>
