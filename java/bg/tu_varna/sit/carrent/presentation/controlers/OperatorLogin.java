@@ -1,13 +1,16 @@
 package bg.tu_varna.sit.carrent.presentation.controlers;
 
 import bg.tu_varna.sit.carrent.business.services.OperatorService;
+import bg.tu_varna.sit.carrent.business.services.UserService;
 import bg.tu_varna.sit.carrent.data.entities.Client;
 import bg.tu_varna.sit.carrent.data.entities.Operator;
+import bg.tu_varna.sit.carrent.data.entities.User;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,7 +25,7 @@ import java.net.URL;
 public class OperatorLogin  {
 
     private final OperatorService service1 = OperatorService.getInstance();
-
+    private final UserService serviceUser = UserService.getInstance();
 
     @FXML
     private TextField OperatorLogin;
@@ -42,19 +45,19 @@ public class OperatorLogin  {
     public void handle(Event event) {
         String loginOp = OperatorLogin.getText().trim();
         String passOp = OperatorPassword.getText().trim();
-       Operator operator = new Operator(loginOp,passOp);
+       User operator = new User(loginOp,passOp);
         //operator.setOperator_login(loginOp);
      //   operator.setOperator_password(passOp);
-        ObservableList<Operator> allTask = service1.getAllTask(loginOp,passOp);
+        ObservableList<User> allTask = serviceUser.getAllTask(loginOp,passOp);
 
         boolean Login=false;
 
-        for (Operator opLog:allTask) {
-            if(operator.getOperator_login().equals(loginOp) &&
-                    operator.getOperator_password().equals(passOp)){
+        for (User opLog:allTask) {
+            if(operator.getLogin().equals(loginOp) &&
+                    operator.getPassword().equals(passOp)){
                 Login=true;
                 System.out.println("True");
-               extracted();
+                buttonOperator.setOnMouseClicked(this::extracted);
             }
             else{
                 System.out.println("error in adm");
@@ -63,7 +66,7 @@ public class OperatorLogin  {
         }
     }
 
-    private void extracted() {
+    private void extracted(MouseEvent mouseEvent) {
         Parent root;
         try{
             URL pathOperWindow = getClass().getResource("/bg/tu_varna/sit/carrent/presentation.view/OperatorWindow.fxml");
@@ -72,7 +75,7 @@ public class OperatorLogin  {
             stage.setTitle("Operator Window");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }

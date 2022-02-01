@@ -8,15 +8,13 @@ import java.util.Set;
 
 @Table(name = "client")
 @Entity
-@DiscriminatorValue("0")
+
 public class Client implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "oper_id_operator", nullable = false,insertable = false,updatable = false)
-    private Operator oper;
+
 
     public Client() { }
 
@@ -27,7 +25,7 @@ public class Client implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idclient",nullable = false,insertable = false, updatable = false)
+    @Column(name="idclient",nullable = false)
     private Long cl_id;
 
 
@@ -37,14 +35,16 @@ public class Client implements Serializable {
     @Column(name="client_password",nullable = false)
     private String cl_password;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "oper_id_operator", nullable = false)
+    private Operator oper;
 
+    @OneToOne
+    (fetch = FetchType.EAGER, mappedBy = "client")
+    private User user;
 
     @OneToMany
-    (fetch = FetchType.LAZY, mappedBy = "idclien")
-    private Set<User>usersSet;
-
-    @OneToMany
-    (fetch = FetchType.LAZY, mappedBy = "idcl")
+    (fetch = FetchType.EAGER, mappedBy = "idcl")
     private Set<Rent>rentSet;
 
     public Operator getOper() {
@@ -65,12 +65,12 @@ public class Client implements Serializable {
         this.rentSet = rentSet;
     }
 
-    public Set<User> getUsersSet() {
-        return usersSet;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsersSet(Set<User> usersSet) {
-        this.usersSet = usersSet;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Client(Operator oper, Long cl_id, String cl_login, String cl_password) {
@@ -110,8 +110,7 @@ public class Client implements Serializable {
                 "cl_id=" + cl_id +
                 ", cl_login=" + cl_login +
                 ", cl_password='" + cl_password + '\'' +
-
-                ", usersSet=" + usersSet +
+                ", user=" + user +
                 ", rentSet=" + rentSet +
                 '}';
     }

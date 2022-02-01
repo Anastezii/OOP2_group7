@@ -1,13 +1,22 @@
 package bg.tu_varna.sit.carrent.presentation.controlers;
 
+import bg.tu_varna.sit.carrent.business.services.CarService;
+import bg.tu_varna.sit.carrent.business.services.OperatorService;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,7 +30,7 @@ public class AddCarController {
     @FXML
     public TextField Color;
     @FXML
-    public TextField Year;
+    public TextField year;
     @FXML
     public TextField Class;
     @FXML
@@ -36,6 +45,9 @@ public class AddCarController {
     public Button TableButton;
 
 
+    private final CarService service = CarService.getInstance();
+
+
     @FXML
     public void initialize() {
        AddCarButton.setOnMouseClicked(this::handle);
@@ -44,8 +56,28 @@ public class AddCarController {
 
     }
     public void handle(Event event) {
-        System.out.println("Hello");
+        String model = Model.getText().trim();
+        String color=Color.getText().trim();
+        String Year =year.getText().trim();
+        String classCar=Class.getText().trim();
+        String smoker=Smoker.getText().trim();
+        String regNum=RegNum.getText().trim();
+        String brand=Brand.getText().trim();
+
+        service.SaveCar(model,color,Year,classCar,smoker,regNum,brand);
+        infobox();
     }
+
+    private void infobox() {
+        Stage dialogStage=new Stage();
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        VBox vBox=new VBox(new Text("Succesfully saved operator"),new Button("Ok"));
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(30));
+        dialogStage.setScene(new Scene(vBox));
+        dialogStage.showAndWait();
+    }
+
     public void handle1(Event event) {
         Parent root;
         try{
@@ -55,7 +87,7 @@ public class AddCarController {
             stage.setTitle("Admin Window");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }
@@ -69,7 +101,7 @@ public class AddCarController {
             stage.setTitle("Table Cars");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }

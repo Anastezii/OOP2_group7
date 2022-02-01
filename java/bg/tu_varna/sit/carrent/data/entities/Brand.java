@@ -6,14 +6,13 @@ import java.util.Set;
 
 @Table(name = "brand")
 @Entity
-@DiscriminatorValue("0")
+
 public class Brand  implements Serializable{
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name="idBRAND",nullable = false)
     private Long brand_id;
 
@@ -22,9 +21,10 @@ public class Brand  implements Serializable{
 
     public Brand() { }
 
+
     @OneToMany
-   (fetch = FetchType.LAZY, mappedBy = "brand")
-    private Set<Model> modelSet;
+            (fetch = FetchType.EAGER, mappedBy = "brand")
+    private Set<Cars> cars;
 
     public Long getBrand_id() {
         return brand_id;
@@ -42,20 +42,21 @@ public class Brand  implements Serializable{
         this.brand_name = brand_name;
     }
 
-    public Set<Model> getModelSet() {
-        return modelSet;
+
+
+    public Set<Cars> getCars() {
+        return cars;
     }
 
-    public void setModelSet(Set<Model> modelSet) {
-        this.modelSet = modelSet;
+    public void setCars(Set<Cars> cars) {
+        this.cars = cars;
     }
 
     @Override
     public String toString() {
         return "Brand{" +
                 "brand_id=" + brand_id +
-                ", brand_name='" + brand_name + '\'' +
-                ", modelSet=" + modelSet +
+
                 '}';
     }
 }

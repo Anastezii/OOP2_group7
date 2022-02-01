@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -49,7 +50,7 @@ public class TablePhirma {
 
        phId.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getPh_id()));
         Name.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getPh_name()));
-        idAdmin.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdad().getAdmin_id()));
+        idAdmin.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdad().getAdmin_login()));
 
         TablePhirma.setItems(phirmaObservableList);
     }
@@ -63,7 +64,7 @@ public class TablePhirma {
             stage.setTitle("Admin Window");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }

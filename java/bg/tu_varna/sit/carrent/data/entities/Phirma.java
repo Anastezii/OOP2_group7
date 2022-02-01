@@ -1,15 +1,38 @@
 package bg.tu_varna.sit.carrent.data.entities;
+import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
+
 @Table(name = "phirma")
 @Entity
-@DiscriminatorValue("0")
+
 public class Phirma implements Serializable{
     @Serial
     private static final long serialVersionUID = 1L;
+
+
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)    //  ** AUTO ** generator="native"
+   // @GenericGenerator(name = "native",strategy = "native")
+    @Column(name="idPhirma",nullable = false)
+    private Long ph_id;
+
+    @Column(name="Phirma_name",nullable = false)
+    private String ph_name;
+
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "idad", nullable = false)
+    private Admin idad;
+
+    @OneToMany
+            ( fetch = FetchType.EAGER, mappedBy = "idph")
+    private Set<Rent> rentssEt;
 
     public Phirma() { }
 
@@ -23,23 +46,6 @@ public class Phirma implements Serializable{
         this.idad = idad;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name="idPhirma",nullable = false,columnDefinition = "int default 1")
-    private Long ph_id;
-
-    @Column(name="Phirma_name",nullable = false)
-    private String ph_name;
-
-
-    @ManyToOne(cascade = CascadeType.ALL,optional = false)
-    @JoinColumn(name = "idad", nullable = false,insertable = true,updatable = true)
-    private Admin idad;
-
-    @OneToMany
-    ( fetch = FetchType.LAZY, mappedBy = "idph")
-    private Set<Rent> rentssEt;
 
     public Phirma(Admin idad) {
         this.idad = idad;
@@ -86,4 +92,7 @@ public class Phirma implements Serializable{
                 ", rentssEt=" + rentssEt +
                 '}';
     }
+
+
+
 }

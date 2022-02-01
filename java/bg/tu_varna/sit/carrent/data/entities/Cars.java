@@ -5,13 +5,13 @@ import java.io.Serializable;
 import java.util.Set;
 @Table(name = "cars")
 @Entity
-@DiscriminatorValue("0")
+
 public class Cars implements Serializable{
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name="idCARS",nullable = false)
     private Long cars_id;
@@ -29,7 +29,7 @@ public class Cars implements Serializable{
     private String cars_year;
 
     @OneToMany
-    (fetch = FetchType.LAZY, mappedBy = "idCARS")
+            (fetch = FetchType.EAGER, mappedBy = "idCARS")
     private Set<Rent> rents;
 
     public Set<Rent> getRents() {
@@ -41,14 +41,18 @@ public class Cars implements Serializable{
     }
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idMODEL", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "idMODEL", nullable = false)
     private Model idMODEL;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idSMOKER", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "idSMOKER", nullable = false)
     private Smoker idSMOKER;
 
-    public Cars(Long cars_id, String cars_class, String cars_color, String cars_reg_num, String cars_year, Model idMODEL, Smoker idSMOKER) {
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "idCarBrand", nullable = false)
+    private Brand brand;
+
+    public Cars(Long cars_id, String cars_class, String cars_color, String cars_reg_num, String cars_year, Model idMODEL, Smoker idSMOKER,Brand brand) {
         this.cars_id = cars_id;
         this.cars_class = cars_class;
         this.cars_color = cars_color;
@@ -56,6 +60,7 @@ public class Cars implements Serializable{
         this.cars_year = cars_year;
         this.idMODEL = idMODEL;
         this.idSMOKER = idSMOKER;
+        this.brand=brand;
     }
 
     public Cars() { }
@@ -116,17 +121,26 @@ public class Cars implements Serializable{
         this.cars_year = cars_year;
     }
 
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
     @Override
     public String toString() {
         return "Cars{" +
                 "cars_id=" + cars_id +
                 ", cars_class='" + cars_class + '\'' +
-                ", cars_color=" + cars_color +
+                ", cars_color='" + cars_color + '\'' +
                 ", cars_reg_num='" + cars_reg_num + '\'' +
                 ", cars_year='" + cars_year + '\'' +
                 ", rents=" + rents +
                 ", idMODEL=" + idMODEL +
                 ", idSMOKER=" + idSMOKER +
+                ", brand=" + brand +
                 '}';
     }
 }

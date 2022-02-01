@@ -27,7 +27,7 @@ public class RentService {
     public ObservableList<Rent> getAllTask( ){
         List<Rent> rents=repository.getAll();
         return FXCollections.observableList(rents.stream().map(o->new Rent(o.getRent_id(),o.getRent_date(),o.getRent_date_end(),
-                        o.getIdCARS(),o.getIdoper(),o.getIdcl(),o.getIdph())).
+                        o.getIdCARS(),o.getIdoper(),o.getIdcl(),o.getIdph(),o.getKm())).
                 collect(Collectors.toList()));
 
     }

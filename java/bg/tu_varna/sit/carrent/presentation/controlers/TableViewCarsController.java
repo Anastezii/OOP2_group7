@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -46,6 +47,8 @@ public class TableViewCarsController {
 
     private final CarService service = CarService.getInstance();
 
+
+
     @FXML
     public void initialize() {
 
@@ -65,7 +68,8 @@ public class TableViewCarsController {
         classCar.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getCars_class()));
        smoker.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdSMOKER().getSmoker_Type()));
        regNum.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getCars_reg_num()));
-       brand.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdMODEL().getBrand().getBrand_name()));
+       brand.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getBrand().getBrand_name()));
+
 
         TableCars.setItems(carsObservableList);
     }
@@ -80,7 +84,7 @@ public class TableViewCarsController {
             stage.setTitle("Admin Window");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }

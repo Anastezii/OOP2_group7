@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -57,7 +58,7 @@ public class CarsViewController {
         year.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getCars_year()));
         carcl.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getCars_class()));
         smoker.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdSMOKER().getSmoker_Type()));
-        brand.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdMODEL().getBrand().getBrand_name()));
+        brand.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getBrand().getBrand_name()));
 
         TableCarsClient.setItems(carsObservableList);
     }
@@ -71,7 +72,7 @@ public class CarsViewController {
             stage.setTitle("Client Window");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }

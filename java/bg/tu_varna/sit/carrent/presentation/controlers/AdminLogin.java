@@ -1,15 +1,24 @@
 package bg.tu_varna.sit.carrent.presentation.controlers;
 import bg.tu_varna.sit.carrent.business.services.AdminService;
+import bg.tu_varna.sit.carrent.business.services.UserService;
 import bg.tu_varna.sit.carrent.data.entities.Admin;
+import bg.tu_varna.sit.carrent.data.entities.User;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +27,7 @@ import java.net.URL;
 public class AdminLogin  {
 
     private final AdminService service = AdminService.getInstance();
+    private final UserService serviceUser = UserService.getInstance();
 
     @FXML
     private TextField textLogin;
@@ -36,22 +46,22 @@ public class AdminLogin  {
     public void handle(Event event) {
         String loginAdmin = textLogin.getText().trim();
         String passAdmin = passwordField.getText().trim();
-        Admin admin = new Admin(loginAdmin,passAdmin);
-     //  admin.setAdmin_login(loginAdmin);
-       // admin.setAdmin_password(passAdmin);
-        ObservableList<Admin> allTask = service.getAllTask(loginAdmin,passAdmin);
+        User admin = new User(loginAdmin,passAdmin);
+        //  admin.setAdmin_login(loginAdmin);
+        // admin.setAdmin_password(passAdmin);
+        ObservableList<User> allTask = serviceUser.getAllTask(loginAdmin,passAdmin);
 
         boolean Login=false;
 
-        for (Admin adminsLog:allTask) {
-            if(admin.getAdmin_login().equals(loginAdmin) && admin.getAdmin_password().equals(passAdmin)){
+        for (User adminsLog:allTask) {
+            if(admin.getLogin().equals(loginAdmin) && admin.getPassword().equals(passAdmin)){
                 Login=true;
                 System.out.println("True");
-
-                extracted();
+                buttonAdmin.setOnMouseClicked(this::extracted);
             }
             else{
                 System.out.println("error in adm");
+                infobox();
                 Login=false;
             }
         }
@@ -86,9 +96,18 @@ public class AdminLogin  {
 
     }
 
+    private void infobox() {
+        Stage dialogStage=new Stage();
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        VBox vBox=new VBox(new Text("///not correct data :( Please try again."),new Button("Ok"));
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(30));
+        dialogStage.setScene(new Scene(vBox));
+        dialogStage.showAndWait();
+    }
 
 
-    private void extracted() {
+    private void extracted(MouseEvent mouseEvent) {
         Parent root;
         try{
             URL pathAdminWindow = getClass().getResource("/bg/tu_varna/sit/carrent/presentation.view/AdminWindow.fxml");
@@ -97,7 +116,7 @@ public class AdminLogin  {
             stage.setTitle("Admin Window");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }
@@ -107,7 +126,7 @@ public class AdminLogin  {
 
    /* Connection connection = null;
     PreparedStatement preparedStatement = null;*/
-   // ResultSet resultSet = null;
+// ResultSet resultSet = null;
 
     /*private void loginAdmins(String loginAdmin, String passAdmin) throws SQLException {
 
@@ -163,6 +182,5 @@ public class AdminLogin  {
             }
         }
     }*/
-
 
 

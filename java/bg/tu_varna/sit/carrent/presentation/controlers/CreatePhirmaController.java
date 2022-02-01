@@ -4,12 +4,14 @@ import bg.tu_varna.sit.carrent.business.services.AdminService;
 import bg.tu_varna.sit.carrent.business.services.PhirmaService;
 import bg.tu_varna.sit.carrent.data.entities.Admin;
 import bg.tu_varna.sit.carrent.data.entities.Phirma;
+import bg.tu_varna.sit.carrent.data.repositories.PhirmaRepository;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -32,6 +34,7 @@ public class CreatePhirmaController {
     private final PhirmaService service = PhirmaService.getInstance();
     private final AdminService serviceAdmin = AdminService.getInstance();
 
+
 @FXML
     public TextField ComponyName;
     @FXML
@@ -40,6 +43,8 @@ public class CreatePhirmaController {
     public Button BackButton;
     @FXML
     public Button TableViewButton;
+    @FXML
+    public TextField username;
 
 
     @FXML
@@ -51,10 +56,11 @@ public class CreatePhirmaController {
     }
     public void handle(Event event) {
 
-
-
         String phirma = ComponyName.getText().trim();
-        service.SavePhirma(phirma);
+        String adminName=username.getText().trim();
+        service.SavePhirma(phirma,adminName);
+
+
         infobox();
     }
     public void handle1(Event event) {
@@ -66,7 +72,7 @@ public class CreatePhirmaController {
             stage.setTitle("Admin Window");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }
@@ -93,7 +99,7 @@ public class CreatePhirmaController {
             stage.setTitle("Table View Company");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }

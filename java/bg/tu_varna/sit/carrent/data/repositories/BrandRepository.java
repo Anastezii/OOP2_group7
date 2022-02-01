@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -100,4 +101,36 @@ public class BrandRepository implements DAORepositories<Brand>{
         session.close();
         return brands;
     }
+
+    public Brand getBrand(String BrandName) {
+
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Brand> brands =new ArrayList<>() ;
+
+        try{
+            String jpql="SELECT a FROM Brand a WHERE a.brand_name= :BrandName";
+
+            brands.addAll(session.createQuery(jpql, Brand.class).
+                    setParameter("BrandName",BrandName).getResultList());
+            log.info("Succesfully get all brands");
+
+        }catch (Exception ex){
+            log.error("Get  brands error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+            session.close();
+        }
+
+        if(brands.size()!=0) {
+            return brands.get(0);
+        }
+        else {
+            return null;
+        }
+
+
+        //return admins;
+    }
+
 }

@@ -6,6 +6,9 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,8 +33,9 @@ public class AdminRepository implements DAORepositories<Admin>{
             log.error("Admin was saved error :("+ex.getMessage());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
+
     }
 
     @Override
@@ -45,8 +49,9 @@ public class AdminRepository implements DAORepositories<Admin>{
             log.error("Admin was updated error :("+ex.getMessage());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
+
     }
 
     @Override
@@ -60,15 +65,16 @@ public class AdminRepository implements DAORepositories<Admin>{
             log.error("Admin was deleted, error :("+ex.getCause());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
+
     }
 
     @Override
     public List<Admin> getByIg(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
-      List<Admin> admins =new LinkedList<Admin>() ;
+        List<Admin> admins =new LinkedList<Admin>() ;
         try{
             String jpql="SELECT t FROM Admin t WHERE admin_id ="+id;
             admins.addAll(session.createQuery(jpql, Admin.class).getResultList());
@@ -78,8 +84,9 @@ public class AdminRepository implements DAORepositories<Admin>{
             log.error("Get ig admins error : "+ex.getCause());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
+
         return admins;
     }
 
@@ -97,8 +104,9 @@ public class AdminRepository implements DAORepositories<Admin>{
             log.error("Get admins error : "+ex.getCause());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
+
         return admins;
     }
 
@@ -116,25 +124,44 @@ public class AdminRepository implements DAORepositories<Admin>{
             log.error("Get admins error : "+ex.getCause());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
+
         return admins;
     }
-    public List<Admin> getAdmin() {
+    public Admin getAdmin(String AdminName) {
+
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
-        List<Admin> admins =new LinkedList<Admin>() ;
+        List<Admin> admins =new ArrayList<>() ;
+
         try{
-            String jpql="SELECT admin_id FROM Admin ";
-            admins.addAll(session.createQuery(jpql, Admin.class).getResultList());
+            String jpql="SELECT a FROM Admin a WHERE a.admin_login= :AdminName";
+
+            admins.addAll(session.createQuery(jpql, Admin.class).
+                    setParameter("AdminName",AdminName).getResultList());
             log.info("Succesfully get all admins");
 
         }catch (Exception ex){
-            log.error("Get ig admins error : "+ex.getCause());
+            log.error("Get  admins error : "+ex.getCause());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
-        return admins;
+        return admins.get(0);
+        //return admins;
+    }
+
+    private static Admin getAdminFromResulyList(ResultSet rs) throws SQLException
+    {
+        Admin emp = null;
+        if (rs.next()) {
+            emp = new Admin();
+            emp.setAdmin_id(rs.getLong("idADMIN"));
+            emp.setAdmin_login(rs.getString("ADMIN_LOGIN"));
+            emp.setAdmin_password(rs.getString("ADMIN_PASSWORD"));
+
+        }
+        return emp;
     }
 }

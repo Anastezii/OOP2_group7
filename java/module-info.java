@@ -16,6 +16,7 @@ module bg.tu_varna.sit.carrent {
     requires java.naming;
     requires java.sql;
      requires mysql.connector.java;
+    requires lombok;
 
 
     opens bg.tu_varna.sit.carrent.data.entities to org.hibernate.orm.core;

@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.carrent.data.entities;
 
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
@@ -7,10 +9,37 @@ import java.util.Set;
 
 @Table(name = "admin")
 @Entity
-@DiscriminatorValue("0")
+
 public class Admin implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name="idADMIN",nullable = false)
+    private Long admin_id;
+
+    @Column(name="ADMIN_LOGIN",nullable = false)
+    private String admin_login;
+
+    @Column(name="ADMIN_PASSWORD",nullable = false)
+    private String admin_password;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idadministr")
+    private Set<Operator> operatorSet;
+
+    @OneToOne
+            (fetch = FetchType.EAGER, mappedBy =  "admin")
+    private User user;
+
+    @OneToMany
+            (fetch = FetchType.EAGER, mappedBy =  "idad")
+    private Set<Phirma> phirmaSet;
+
+    public Admin(String admin_login) { this.admin_login = admin_login;
+    }
 
     public Admin(String admin_login, String admin_password) {
         this.admin_login = admin_login;
@@ -23,33 +52,6 @@ public class Admin implements Serializable {
         this.admin_id = admin_id;
 
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name="idADMIN",nullable = false,insertable = false,updatable = false)
-    private Long admin_id;
-
-    @Column(name="ADMIN_LOGIN",nullable = false)
-    private String admin_login;
-
-    @Column(name="ADMIN_PASSWORD",nullable = false)
-    private String admin_password;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idadministr")
-    private Set<Operator> operatorSet;
-
-    @OneToMany
-    (fetch = FetchType.LAZY, mappedBy =  "idADMIN")
-    private Set<User> userSet;
-
-    @OneToMany
-            (fetch = FetchType.LAZY, mappedBy =  "idad")
-    private Set<Phirma> phirmaSet;
-
-    public Admin(String admin_login) { this.admin_login = admin_login;
-    }
-
     public Set<Phirma> getPhirmaSet() {
         return phirmaSet;
     }
@@ -90,23 +92,18 @@ public class Admin implements Serializable {
         this.operatorSet = operatorSet;
     }
 
-    public Set<User> getUserSet() {
-        return userSet;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
     public String toString() {
         return "Admin{" +
                 "admin_id=" + admin_id +
-                ", admin_login='" + admin_login + '\'' +
-                ", admin_password='" + admin_password + '\'' +
-                ", operatorSet=" + operatorSet +
-                ", userSet=" + userSet +
-                ", phirmaSet=" + phirmaSet +
                 '}';
     }
 }

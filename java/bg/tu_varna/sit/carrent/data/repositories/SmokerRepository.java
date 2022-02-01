@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -100,4 +101,30 @@ public class SmokerRepository implements DAORepositories<Smoker>{
         session.close();
         return smokers;
     }
+
+    public Smoker getSmoker(String SmokerType) {
+
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Smoker> smokers =new ArrayList<>() ;
+
+        try{
+            String jpql="SELECT a FROM Smoker a WHERE a.smoker_type= :SmokerType";
+
+            smokers.addAll(session.createQuery(jpql, Smoker.class).
+                    setParameter("SmokerType",SmokerType).getResultList());
+            log.info("Succesfully get all smokers");
+
+        }catch (Exception ex){
+            log.error("Get  smokers error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+            session.close();
+        }
+        return smokers.get(0);
+        //return admins;
+    }
+
+
+
 }

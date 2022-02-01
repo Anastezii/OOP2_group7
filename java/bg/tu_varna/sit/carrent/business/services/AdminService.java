@@ -46,17 +46,17 @@ public class AdminService {
     }
 
 
-   public ObservableList<Admin> getAllTask(String login,String pass){
-       List<Admin> admins=repository.getLogin(login,pass);
-       return FXCollections.observableList(admins.stream().map(o->new Admin(o.getAdmin_login(),
-               o.getAdmin_password())).collect(Collectors.toList()));
+    public ObservableList<Admin> getAllTask(String login,String pass){
+        List<Admin> admins=repository.getLogin(login,pass);
+        return FXCollections.observableList(admins.stream().map(o->new Admin(o.getAdmin_login(),
+                o.getAdmin_password())).collect(Collectors.toList()));
 
     }
-    public ObservableList<Admin> getAdmin(){
-        List<Admin> admins=repository.getAdmin();
+   /* public ObservableList<Admin> getAdmin(String AdminName){
+        List<Admin> admins=repository.getAdmin(AdminName);
         return FXCollections.observableList(admins.stream().map(o->new Admin(o.getAdmin_id())).collect(Collectors.toList()));
 
-    }
+    }*/
 
      /*public ResultSet getAdmin(Admin admin){
         ResultSet resSet=null;
@@ -80,6 +80,5 @@ public class AdminService {
             transaction.commit();
         }session.close();
         return resSet;*/
-    }
-
+}
 

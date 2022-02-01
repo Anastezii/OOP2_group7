@@ -42,6 +42,8 @@ public class TableRentController {
     public Button ReturnButton;
 
     private final RentService service = RentService.getInstance();
+    @FXML
+    public TableColumn<Rent, String> Carkm;
 
     @FXML
     public void initialize() {
@@ -61,8 +63,9 @@ public class TableRentController {
        logOp.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdoper().getOperator_login()));
        logCl.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdcl().getCl_login()));
         phName.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdph().getPh_name()));
-       idCars.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdCARS().getCars_id()));
+       idCars.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdCARS().getCars_reg_num()));
        CarRegNum.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getIdCARS().getCars_reg_num()));
+       Carkm.setCellValueFactory(p->new ReadOnlyObjectWrapper(p.getValue().getKm()));
 
         RentTable.setItems(rentObservableList);
     }

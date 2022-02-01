@@ -2,11 +2,13 @@ package bg.tu_varna.sit.carrent.presentation.controlers;
 
 import bg.tu_varna.sit.carrent.business.services.OperatorService;
 import bg.tu_varna.sit.carrent.business.services.PhirmaService;
+import bg.tu_varna.sit.carrent.business.services.UserService;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,6 +26,7 @@ import java.net.URL;
 public class AddOperatorController {
 
     private final OperatorService service = OperatorService.getInstance();
+    private final UserService serviceUser = UserService.getInstance();
 
     @FXML
     public TextField Operatorlogin;
@@ -35,6 +38,12 @@ public class AddOperatorController {
     public Button BackButton;
     @FXML
     public Button TableButton;
+    @FXML
+    public TextField AdminName;
+    @FXML
+    public TextField UserName;
+    @FXML
+    public TextField UserPass;
 
     @FXML
     public void initialize() {
@@ -46,7 +55,11 @@ public class AddOperatorController {
         boolean Save=false;
         String opLogin = Operatorlogin.getText().trim();
         String opPass=OperatorPass.getText().trim();
-        service.SaveOperator(opLogin,opPass);
+        String admin =AdminName.getText().trim();
+        String username=UserName.getText().trim();
+        String userpass=UserPass.getText().trim();
+        service.SaveOperator(opLogin,opPass,admin);
+        serviceUser.SaveOperator(username,userpass,opLogin);
         infobox();
     }
     public void handle1(Event event) {
@@ -58,7 +71,7 @@ public class AddOperatorController {
             stage.setTitle("Admin Window");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }
@@ -85,7 +98,7 @@ public class AddOperatorController {
             stage.setTitle("Table Operator");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }

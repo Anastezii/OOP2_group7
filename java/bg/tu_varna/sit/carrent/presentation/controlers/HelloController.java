@@ -10,6 +10,7 @@ import bg.tu_varna.sit.carrent.presentation.models.AdminListViewMOdel;
 import bg.tu_varna.sit.carrent.presentation.models.ClientListViewMOdel;
 import bg.tu_varna.sit.carrent.presentation.models.HelloModel;
 import bg.tu_varna.sit.carrent.presentation.models.OperatorListViewModel;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,8 +32,8 @@ import java.util.ResourceBundle;
 
 public class HelloController {
 
-
-
+    @FXML
+    public Button ExitButton;
     @FXML
     private Button OperatorButton;
 
@@ -51,7 +52,7 @@ public class HelloController {
         OperatorButton.setOnMouseClicked(this::extracted2);
         AdminButton.setOnMouseClicked(this::extracted1);
         ClientButton.setOnMouseClicked(this::extracted);
-
+        ExitButton.setOnMouseClicked(this::exitWindow);
     }
 
 
@@ -65,7 +66,7 @@ public class HelloController {
             stage.setTitle("Client Log");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }
@@ -80,7 +81,7 @@ public class HelloController {
             stage.setTitle("Admin Log");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }
@@ -94,12 +95,18 @@ public class HelloController {
             stage.setTitle("Operator Log");
             stage.setScene(new Scene(root));
             stage.show();
-            //((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
+            ((Node)(mouseEvent.getSource())).getScene().getWindow().hide();
         }catch(IOException e){
             e.getCause();
         }
     }
+    @FXML
+    private void exitWindow(Event event) {
 
+            Stage stage=(Stage) ExitButton.getScene().getWindow();
+           stage.close();
+
+    }
 
     }
 

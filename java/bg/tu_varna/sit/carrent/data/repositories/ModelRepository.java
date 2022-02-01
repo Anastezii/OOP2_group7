@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -100,4 +101,32 @@ public class ModelRepository implements DAORepositories<Model>{
         session.close();
         return models;
     }
+
+    public Model getModel(String ModelName) {
+
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Model> models =new ArrayList<>() ;
+
+        try{
+            String jpql="SELECT a FROM Model a WHERE a.model_name= :ModelName";
+
+            models.addAll(session.createQuery(jpql, Model.class).
+                    setParameter("ModelName",ModelName).getResultList());
+            log.info("Succesfully get all models");
+
+        }catch (Exception ex){
+            log.error("Get  models error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+            session.close();
+        }
+        if(models.size()!=0){
+        return models.get(0);}
+        else{
+            return null;
+        }
+        //return admins;
+    }
+
 }

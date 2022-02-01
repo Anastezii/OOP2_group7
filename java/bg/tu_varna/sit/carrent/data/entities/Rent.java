@@ -10,15 +10,14 @@ import java.util.Set;
 
 @Table(name = "rent")
 @Entity
-@DiscriminatorValue("0")
+
 public class Rent implements Serializable{
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name="idRENT",nullable = false,insertable = false,updatable = false)
+    @Column(name="idRENT",nullable = false)
     private Long rent_id;
 
     @Column(name="RENT_date",nullable = false)
@@ -26,6 +25,17 @@ public class Rent implements Serializable{
 
     @Column(name="date_end",nullable = false)
     private LocalDate rent_date_end;
+
+    @Column(name="km",nullable = false)
+    private String km;
+
+    public String getKm() {
+        return km;
+    }
+
+    public void setKm(String km) {
+        this.km = km;
+    }
 
     public LocalDate getRent_date_end() {
         return rent_date_end;
@@ -36,24 +46,24 @@ public class Rent implements Serializable{
     }
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idCARS", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "idCARS", nullable = false)
     private Cars idCARS;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idoper", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "idoper", nullable = false)
     private Operator idoper;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idcl", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "idcl", nullable = false)
     private Client idcl;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idph", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "idph", nullable = false)
     private Phirma idph;
 
     public Rent() { }
 
-    public Rent(Long rent_id, LocalDate rent_date, LocalDate rent_date_end, Cars idCARS, Operator idoper, Client idcl, Phirma idph) {
+    public Rent(Long rent_id, LocalDate rent_date, LocalDate rent_date_end, Cars idCARS, Operator idoper, Client idcl, Phirma idph, String km) {
         this.rent_id = rent_id;
         this.rent_date = rent_date;
         this.rent_date_end = rent_date_end;
@@ -61,6 +71,7 @@ public class Rent implements Serializable{
         this.idoper = idoper;
         this.idcl = idcl;
         this.idph = idph;
+        this.km=km;
     }
 
     public Phirma getIdph() {

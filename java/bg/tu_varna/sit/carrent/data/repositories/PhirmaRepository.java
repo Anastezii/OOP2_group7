@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,8 +30,9 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
             log.error("Phirma was saved error :("+ex.getCause());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
+
 
     }
 
@@ -45,8 +47,9 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
             log.error("Phirma was update error :("+ex.getCause());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
+
     }
 
     @Override
@@ -60,8 +63,9 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
             log.error("Phirma was delete error :("+ex.getCause());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
+
     }
 
     @Override
@@ -78,8 +82,9 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
             log.error("Get ig phirmas error : "+ex.getCause());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
+
         return phirmas;
     }
 
@@ -97,17 +102,18 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
             log.error("Get phirmas error : "+ex.getMessage());
         }finally {
             transaction.commit();
+            session.close();
         }
-        session.close();
+
         return phirmas;
     }
-    public List<Phirma> getAdminLogin(String admin) {
+   /* public void getAdminLogin(Phirma ph) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<Phirma> admins =new LinkedList<Phirma>() ;
         try{
-            String jpql="SELECT p FROM Phirma p WHERE p.idad=:admin";
-            admins.addAll(session.createQuery(jpql, Phirma.class).setParameter("admin",admin).
+            String jpql="insert into phirma ( Phirma_name, idad) values (?,?)";
+            admins.addAll(session.createQuery(jpql, Phirma.class).
                     getResultList());
             log.info("Succesfully get all admins");
 
@@ -117,7 +123,30 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
             transaction.commit();
         }
         session.close();
-        return admins;
+
+    }*/
+
+    public Phirma getPhirma(String PhirmaName) {
+
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Phirma> phirmas =new ArrayList<>() ;
+
+        try{
+            String jpql="SELECT a FROM Phirma a WHERE a.ph_name= :PhirmaName";
+
+            phirmas.addAll(session.createQuery(jpql, Phirma.class).
+                    setParameter("PhirmaName",PhirmaName).getResultList());
+            log.info("Succesfully get all phirmas");
+
+        }catch (Exception ex){
+            log.error("Get phirmas error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+            session.close();
+        }
+        return phirmas.get(0);
+        //return admins;
     }
 
 }

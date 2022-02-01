@@ -9,12 +9,24 @@ import java.util.Set;
 
 @Table(name = "operator")
 @Entity
-@DiscriminatorValue("0")
+
 public class Operator implements Serializable {
 
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="idOPERATOR",nullable = false)
+    private Long operator_id;
+
+    @Column(name="OPERATOR_LOGIN",nullable = false)
+    private String operator_login;
+
+    @Column(name="OPERATOR_PASSWORD",nullable = false)
+    private String operator_password;
 
     public Operator() { }
 
@@ -30,25 +42,12 @@ public class Operator implements Serializable {
         this.idadministr = idadministr;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="idOPERATOR",nullable = false,insertable = false,updatable = false)
-    private Long operator_id;
-
-    @Column(name="OPERATOR_LOGIN",nullable = false)
-    private String operator_login;
-
-    @Column(name="OPERATOR_PASSWORD",nullable = false)
-    private String operator_password;
-
-
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "idadministr", nullable = false, insertable = false, updatable = false)
     private Admin idadministr;
 
     @OneToMany
-    (fetch = FetchType.LAZY, mappedBy = "idoper")
+    (fetch = FetchType.EAGER, mappedBy = "idoper")
     private Set<Rent> rents;
 
     public Set<Rent> getRents() {
@@ -59,9 +58,9 @@ public class Operator implements Serializable {
         this.rents = rents;
     }
 
-    @OneToMany
-    (fetch = FetchType.LAZY, mappedBy = "idOPERATOR")
-    private Set<User> users;
+    @OneToOne
+    (fetch = FetchType.EAGER, mappedBy = "operator")
+    private User user;
 
     @OneToMany(mappedBy = "oper", orphanRemoval = true)
     private List<Client> clients = new ArrayList<>();
@@ -109,12 +108,12 @@ public class Operator implements Serializable {
         this.operator_password = operator_password;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -126,7 +125,7 @@ public class Operator implements Serializable {
                 ", clientSet=" + clients +
                 ", idadministr=" + idadministr +
                 ", rents=" + rents +
-                ", users=" + users +
+                ", user=" + user +
                 '}';
     }
 }

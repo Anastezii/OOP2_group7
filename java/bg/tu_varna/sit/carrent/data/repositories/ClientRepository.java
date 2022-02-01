@@ -1,10 +1,12 @@
 package bg.tu_varna.sit.carrent.data.repositories;
 import bg.tu_varna.sit.carrent.data.access.Connection;
 import bg.tu_varna.sit.carrent.data.entities.Client;
+import bg.tu_varna.sit.carrent.data.entities.Operator;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -121,4 +123,28 @@ public class ClientRepository implements DAORepositories<Client> {
         session.close();
         return clients;
     }
+
+    public Client getClient(String ClientName) {
+
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Client> clients =new ArrayList<>() ;
+
+        try{
+            String jpql="SELECT a FROM Client a WHERE a.cl_login= :ClientName";
+
+            clients.addAll(session.createQuery(jpql,Client.class).
+                    setParameter("ClientName",ClientName).getResultList());
+            log.info("Succesfully get all  clients");
+
+        }catch (Exception ex){
+            log.error("Get   clients error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+            session.close();
+        }
+        return  clients.get(0);
+        //return admins;
+    }
+
 }

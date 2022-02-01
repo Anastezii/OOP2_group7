@@ -3,6 +3,8 @@ package bg.tu_varna.sit.carrent.business.services;
 import bg.tu_varna.sit.carrent.data.entities.Admin;
 import bg.tu_varna.sit.carrent.data.entities.Operator;
 import bg.tu_varna.sit.carrent.data.entities.Phirma;
+import bg.tu_varna.sit.carrent.data.entities.User;
+import bg.tu_varna.sit.carrent.data.repositories.AdminRepository;
 import bg.tu_varna.sit.carrent.data.repositories.OperatorRepository;
 import bg.tu_varna.sit.carrent.presentation.models.OperatorListViewModel;
 import javafx.collections.FXCollections;
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 public class OperatorService {
 
     private final OperatorRepository repository= OperatorRepository.getInstance();
+    private final AdminRepository repositoryAdmin= AdminRepository.getInstance();
+
 
 
     public static OperatorService getInstance(){
@@ -38,10 +42,11 @@ public class OperatorService {
     }
 
 
-    public void SaveOperator(String opName,String opPass){
+    public void SaveOperator(String opName,String opPass,String AdminName){
        Operator operator=new Operator();
         operator.setOperator_login(opName);
         operator.setOperator_password(opPass);
+        operator.setIdadministr(repositoryAdmin.getAdmin(AdminName));
         repository.save(operator);
 
     }

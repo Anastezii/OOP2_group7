@@ -100,4 +100,8 @@ public class RentRepository implements DAORepositories<Rent>{
         session.close();
         return rents;
     }
+
+
+
+
 }

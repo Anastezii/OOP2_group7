@@ -1,11 +1,13 @@
 package bg.tu_varna.sit.carrent.data.repositories;
 
 import bg.tu_varna.sit.carrent.data.access.Connection;
+import bg.tu_varna.sit.carrent.data.entities.Admin;
 import bg.tu_varna.sit.carrent.data.entities.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -102,5 +104,45 @@ public static UserRepository getInstance(){return UserRepository.UserRepositoryH
         return users;
     }
 
+
+    public List<User> getLoginAdmin(String login, String pass){
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<User> admins =new LinkedList<User>() ;
+        try{
+            String jpql="SELECT t FROM User t WHERE t.login= :login AND t.password= :pass ";
+            admins.addAll(session.createQuery(jpql, User.class).setParameter("login",login).
+                    setParameter("pass",pass).getResultList());
+            log.info("Result all admins which matched.");
+
+        }catch (Exception ex){
+            log.error("Get admins error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+            session.close();
+        }
+
+        return admins;
+    }
+
+    public User getUser(String login){
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<User> users =new ArrayList<>() ;
+        try{
+            String jpql="SELECT t FROM User t WHERE t.login= :login ";
+            users.addAll(session.createQuery(jpql, User.class).setParameter("login",login).
+                   getResultList());
+            log.info("Result all admins which matched.");
+
+        }catch (Exception ex){
+            log.error("Get admins error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+            session.close();
+        }
+
+        return users.get(0);
+    }
 
 }

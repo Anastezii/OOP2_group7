@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -98,4 +99,30 @@ public class UserTypeRepository implements DAORepositories<UserType>{
         session.close();
         return types;
     }
+
+    public UserType getType(String UserTypeName) {
+
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<UserType> types =new ArrayList<>() ;
+
+        try{
+            String jpql="SELECT a FROM UserType a WHERE a.user_type_name= :UserTypeName";
+
+            types.addAll(session.createQuery(jpql,UserType.class).
+                    setParameter("UserTypeName",UserTypeName).getResultList());
+            log.info("Succesfully get all types");
+
+        }catch (Exception ex){
+            log.error("Get  types error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+            session.close();
+        }
+        return types.get(0);
+        //return admins;
+    }
+
+
+
 }

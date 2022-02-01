@@ -1,7 +1,10 @@
 package bg.tu_varna.sit.carrent.presentation.controlers;
 
+import bg.tu_varna.sit.carrent.business.services.CarService;
+import bg.tu_varna.sit.carrent.business.services.ClientService;
 import bg.tu_varna.sit.carrent.business.services.PhirmaService;
 import bg.tu_varna.sit.carrent.business.services.RentService;
+import bg.tu_varna.sit.carrent.data.entities.Phirma;
 import bg.tu_varna.sit.carrent.data.entities.Rent;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ObservableList;
@@ -24,12 +27,12 @@ public class AddRentController {
 
 
     @FXML
-    public ComboBox Car;
+    public ComboBox<String> Car;
 
     @FXML
-    public ComboBox Client;
+    public ComboBox<String> Client;
     @FXML
-    public ComboBox Compony;
+    public ComboBox<String> Compony;
     @FXML
     public Button RentButton;
     @FXML
@@ -42,8 +45,10 @@ public class AddRentController {
     @FXML
     public DatePicker EndDate;
 
-
     private final RentService service = RentService.getInstance();
+    private final ClientService serviceClient =ClientService.getInstance();
+    private final PhirmaService serviceCompany = PhirmaService.getInstance();
+    private final CarService serviceCars = CarService.getInstance();
 
     @FXML
     public void initialize() {
@@ -54,7 +59,8 @@ public class AddRentController {
     }
 
     private void loadCars() {
-        System.out.println("Hello");
+        ObservableList<Phirma> phimaObservableList = serviceCompany.getAllTask();
+
 
     }
 

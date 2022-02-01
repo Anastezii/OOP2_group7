@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Table(name = "model")
 @Entity
-@DiscriminatorValue("0")
+
 public class Model implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -20,12 +20,8 @@ public class Model implements Serializable {
     @Column(name = "MODEL_NAME", nullable = false)
     private String model_name;
 
-    @ManyToOne
-    @JoinColumn(name = "idBRAND", nullable = false,insertable = false,updatable = false)
-    private Brand brand;
-
     @OneToMany
-            (fetch = FetchType.LAZY, mappedBy = "idMODEL")
+            (fetch = FetchType.EAGER, mappedBy = "idMODEL")
     private Set<Cars> carsSet;
 
     public Set<Cars> getCarsSet() {
@@ -36,13 +32,7 @@ public class Model implements Serializable {
         this.carsSet = carsSet;
     }
 
-    public Brand getBrand() {
-        return brand;
-    }
 
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
 
     public Long getModel_id() {
         return model_id;
@@ -60,13 +50,12 @@ public class Model implements Serializable {
         this.model_name = model_name;
     }
 
+    public Model() { }
+
     @Override
     public String toString() {
         return "Model{" +
                 "model_id=" + model_id +
-                ", model_name='" + model_name + '\'' +
-                ", brand=" + brand +
-                ", carsSet=" + carsSet +
                 '}';
     }
 }

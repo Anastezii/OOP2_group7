@@ -1,11 +1,13 @@
 package bg.tu_varna.sit.carrent.data.repositories;
 
 import bg.tu_varna.sit.carrent.data.access.Connection;
+import bg.tu_varna.sit.carrent.data.entities.Admin;
 import bg.tu_varna.sit.carrent.data.entities.Operator;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -120,6 +122,29 @@ public class OperatorRepository implements DAORepositories<Operator> {
         }
         session.close();
         return operators;
+    }
+
+    public Operator getOperator(String OperatorName) {
+
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Operator> operators =new ArrayList<>() ;
+
+        try{
+            String jpql="SELECT a FROM Operator a WHERE a.operator_login= :OperatorName";
+
+            operators.addAll(session.createQuery(jpql,Operator.class).
+                    setParameter("OperatorName",OperatorName).getResultList());
+            log.info("Succesfully get all operators");
+
+        }catch (Exception ex){
+            log.error("Get  operators error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+            session.close();
+        }
+        return operators.get(0);
+        //return admins;
     }
 
 }

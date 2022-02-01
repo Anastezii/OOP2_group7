@@ -5,9 +5,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
-@Table(name = "userType")
+@Table(name = "user_type")
 @Entity
-@DiscriminatorValue("0")
+
 public class UserType implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -15,7 +15,7 @@ public class UserType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idUSER_TYPE",nullable = false,insertable = false,updatable = false)
+    @Column(name="idUSER_TYPE",nullable = false)
     private Long userType_id;
 
 
@@ -23,7 +23,7 @@ public class UserType implements Serializable {
     private String user_type_name;
 
     @OneToMany
-    @JoinColumn(name = "iduser_type",nullable = false,insertable = false,updatable = false)
+            (fetch = FetchType.EAGER, mappedBy = "iduserType")
     private Set<User> users;
 
     public Set<User> getUsers() {

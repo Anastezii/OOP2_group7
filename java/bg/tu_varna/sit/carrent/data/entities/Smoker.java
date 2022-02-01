@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Table(name = "smoker")
 @Entity
-@DiscriminatorValue("0")
+
 public class Smoker implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -14,14 +14,14 @@ public class Smoker implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name="idSMOKER",nullable = false,insertable = false,updatable = false)
+    @Column(name="idSMOKER",nullable = false)
     private Long smoker_id;
 
     @Column(name="SMOKER_TYPE",nullable = false)
     private String smoker_type;
 
     @OneToMany
-    (fetch = FetchType.LAZY, mappedBy = "idSMOKER")
+    (fetch = FetchType.EAGER, mappedBy = "idSMOKER")
     private Set<Cars> cars;
 
     public Long getSmoker_id() {
@@ -32,7 +32,7 @@ public class Smoker implements Serializable {
         this.smoker_id = smoker_id;
     }
 
-
+    public Smoker() { }
 
     public Set<Cars> getCars() {
         return cars;
@@ -54,8 +54,7 @@ public class Smoker implements Serializable {
     public String toString() {
         return "Smoker{" +
                 "smoker_id=" +smoker_id +
-                ", smoker type='" + smoker_type + '\'' +
-                ", cars=" + cars +
+
                 '}';
     }
 }
