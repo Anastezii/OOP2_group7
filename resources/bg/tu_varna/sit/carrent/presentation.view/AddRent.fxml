@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,52 +13,49 @@
 
 <HBox xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.carrent.presentation.controlers.AddRentController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #b0c4de;">
+      <AnchorPane prefHeight="523.0" prefWidth="600.0" style="-fx-background-color: #b0c4de;">
          <children>
             <Label layoutX="146.0" layoutY="23.0" text="You pressed button for add rent">
                <font>
                   <Font name="Berlin Sans FB" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="25.0" layoutY="98.0" text="Please input date of rent">
+            <Label layoutX="18.0" layoutY="91.0" text="Please input date of rent">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="20.0" layoutY="179.0" text="Please choose car">
+            <Label layoutX="18.0" layoutY="172.0" text="Please input car reg.number">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="25.0" layoutY="215.0" text="Please choose client">
+            <Label layoutX="18.0" layoutY="216.0" text="Please input name of client">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="25.0" layoutY="257.0" text="Please choose compony">
+            <Label layoutX="18.0" layoutY="258.0" text="Please input compony">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="Car" layoutX="264.0" layoutY="166.0" prefWidth="150.0" />
-            <ComboBox fx:id="Client" layoutX="264.0" layoutY="211.0" prefWidth="150.0" />
-            <ComboBox fx:id="Compony" layoutX="264.0" layoutY="253.0" prefWidth="150.0" />
-            <Button fx:id="RentButton" layoutX="46.0" layoutY="299.0" mnemonicParsing="false" onAction="#handle" prefHeight="52.0" prefWidth="144.0" style="-fx-background-color: #b0c4de;" text="Add rent">
+            <Button fx:id="RentButton" layoutX="35.0" layoutY="415.0" mnemonicParsing="false" onAction="#handle" prefHeight="52.0" prefWidth="144.0" style="-fx-background-color: #b0c4de;" text="Add rent">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="BackButton" layoutX="438.0" layoutY="300.0" mnemonicParsing="false" onAction="#handle1" prefHeight="52.0" prefWidth="144.0" style="-fx-background-color: #b0c4de;" text="Back">
+            <Button fx:id="BackButton" layoutX="424.0" layoutY="415.0" mnemonicParsing="false" onAction="#handle1" prefHeight="52.0" prefWidth="144.0" style="-fx-background-color: #b0c4de;" text="Back">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="TableButton" layoutX="241.0" layoutY="299.0" mnemonicParsing="false" onAction="#handle2" prefHeight="52.0" prefWidth="144.0" style="-fx-background-color: #b0c4de;" text="Table Rent">
+            <Button fx:id="TableButton" layoutX="241.0" layoutY="415.0" mnemonicParsing="false" onAction="#handle2" prefHeight="52.0" prefWidth="144.0" style="-fx-background-color: #b0c4de;" text="Table Rent">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Button>
-            <Text layoutX="20.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please input date of end of rent">
+            <Text layoutX="26.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please input date of end of rent">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
@@ -70,21 +67,36 @@
                   <Image url="@../img/help-operator.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="22.0" layoutX="60.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="25.0" fitWidth="22.0" layoutX="54.0" layoutY="430.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/plus.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="22.0" layoutX="253.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="25.0" fitWidth="22.0" layoutX="255.0" layoutY="430.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/tablet.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="21.0" fitWidth="30.0" layoutX="534.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.0" fitWidth="30.0" layoutX="515.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/return.png" />
                </image>
             </ImageView>
+            <TextField fx:id="CarText" layoutX="264.0" layoutY="167.0" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #f8f8ff;" />
+            <TextField fx:id="ClientText" layoutX="266.0" layoutY="211.0" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #f8f8ff;" />
+            <TextField fx:id="PhirmaText" layoutX="266.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #f8f8ff;" />
+            <Text layoutX="16.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please input km before rent">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="kmBefore" layoutX="266.0" layoutY="299.0" prefHeight="26.0" prefWidth="174.0" style="-fx-background-color: #f8f8ff;" />
+            <TextField fx:id="OperatorText" layoutX="266.0" layoutY="341.0" prefHeight="26.0" prefWidth="174.0" style="-fx-background-color: #f8f8ff;" />
+            <Text layoutX="19.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLease input your name">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>
