@@ -143,8 +143,13 @@ public class ClientRepository implements DAORepositories<Client> {
             transaction.commit();
             session.close();
         }
-        return  clients.get(0);
-        //return admins;
+        if(clients.size()!=0){
+            return  clients.get(0);
+        }else{
+            return null;
+        }
+
+
     }
 
 }

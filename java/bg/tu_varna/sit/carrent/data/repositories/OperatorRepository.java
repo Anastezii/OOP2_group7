@@ -143,8 +143,12 @@ public class OperatorRepository implements DAORepositories<Operator> {
             transaction.commit();
             session.close();
         }
-        return operators.get(0);
-        //return admins;
+        if(operators.size()!=0){
+        return operators.get(0);}
+        else{
+            return null;
+        }
+
     }
 
 }

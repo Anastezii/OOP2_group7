@@ -14,8 +14,6 @@ public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-
-
     public Client() { }
 
     public Client(String cl_login, String cl_password) {

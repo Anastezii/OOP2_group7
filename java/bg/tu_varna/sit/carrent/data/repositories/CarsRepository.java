@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -99,5 +100,32 @@ public class CarsRepository implements DAORepositories<Cars>{
         }
         session.close();
         return cars;
+    }
+
+    public Cars getCars(String CarRegNum) {
+
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Cars> cars =new ArrayList<>() ;
+
+        try{
+            String jpql="SELECT a FROM Cars a WHERE a.cars_reg_num= :CarRegNum";
+
+            cars.addAll(session.createQuery(jpql,Cars.class).
+                    setParameter("CarRegNum",CarRegNum).getResultList());
+            log.info("Succesfully get all cars");
+
+        }catch (Exception ex){
+            log.error("Get  cars error : "+ex.getCause());
+        }finally {
+            transaction.commit();
+            session.close();
+        }
+        if(cars.size()!=0){
+        return cars.get(0);}
+        else{
+            return null;
+        }
+
     }
 }

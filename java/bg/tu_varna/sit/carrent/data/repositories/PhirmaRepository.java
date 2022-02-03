@@ -145,8 +145,12 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
             transaction.commit();
             session.close();
         }
-        return phirmas.get(0);
-        //return admins;
+        if(phirmas.size()!=0){
+        return phirmas.get(0);}
+        else{
+            return null;
+        }
+
     }
 
 }

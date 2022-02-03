@@ -63,7 +63,7 @@ public class OperatorWindowController {
             URL pathClientLog = getClass().getResource("/bg/tu_varna/sit/carrent/presentation.view/hello-view.fxml");
             root= FXMLLoader.load(pathClientLog);
             Stage stage=new Stage();
-            stage.setTitle("Add Rent Window");
+            stage.setTitle("Operator Window");
             stage.setScene(new Scene(root));
             stage.show();
             ((Node)(event.getSource())).getScene().getWindow().hide();
