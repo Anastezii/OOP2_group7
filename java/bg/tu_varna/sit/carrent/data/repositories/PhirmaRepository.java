@@ -69,7 +69,7 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
     }
 
     @Override
-    public List<Phirma> getByIg(Long id) {
+    public Phirma getById(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<Phirma> phirmas=new LinkedList<Phirma>() ;
@@ -85,7 +85,7 @@ public class PhirmaRepository implements DAORepositories<Phirma>{
             session.close();
         }
 
-        return phirmas;
+        return phirmas.get(0);
     }
 
     @Override

@@ -63,7 +63,7 @@ public class UserTypeRepository implements DAORepositories<UserType>{
     }
 
     @Override
-    public List<UserType> getByIg(Long id) {
+    public UserType getById(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<UserType> types=new LinkedList<UserType>() ;
@@ -78,7 +78,7 @@ public class UserTypeRepository implements DAORepositories<UserType>{
             transaction.commit();
         }
         session.close();
-        return types;
+        return types.get(0);
     }
 
     @Override

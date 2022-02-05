@@ -71,7 +71,7 @@ public class AdminRepository implements DAORepositories<Admin>{
     }
 
     @Override
-    public List<Admin> getByIg(Long id) {
+    public Admin getById(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<Admin> admins =new LinkedList<Admin>() ;
@@ -87,7 +87,7 @@ public class AdminRepository implements DAORepositories<Admin>{
             session.close();
         }
 
-        return admins;
+        return admins.get(0);
     }
 
     @Override
@@ -152,7 +152,7 @@ public class AdminRepository implements DAORepositories<Admin>{
         //return admins;
     }
 
-    private static Admin getAdminFromResulyList(ResultSet rs) throws SQLException
+    private static Admin getAdminFromResultList(ResultSet rs) throws SQLException
     {
         Admin emp = null;
         if (rs.next()) {

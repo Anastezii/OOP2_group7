@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class RentRepository implements DAORepositories<Rent>{
     }
 
     @Override
-    public List<Rent> getByIg(Long id) {
+    public Rent getById(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<Rent> rents=new LinkedList<Rent>() ;
@@ -79,7 +80,7 @@ public class RentRepository implements DAORepositories<Rent>{
             transaction.commit();
         }
         session.close();
-        return rents;
+        return rents.get(0);
     }
 
     @Override
@@ -102,6 +103,29 @@ public class RentRepository implements DAORepositories<Rent>{
     }
 
 
+    public Rent CheckRent(LocalDate dateStartRent,LocalDate dateEndRent) {
+        Session session= Connection.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<Rent> rents=new LinkedList<Rent>() ;
+        try{
+            String jpql="SELECT r FROM Rent r WHERE r.rent_date=: dateStartRent AND r.rent_date_end=:dateEndRent";
+            rents.addAll(session.createQuery(jpql,Rent.class).setParameter("dateStartRent",dateStartRent).
+                    setParameter("dateEndRent",dateEndRent).getResultList());
+            log.info("Result all rents data");
+
+        }catch (Exception ex){
+            log.error("Get rents data error : "+ex.getMessage());
+        }finally {
+            transaction.commit();
+        }
+        session.close();
+        if(rents.size()!=0){
+            return rents.get(0);
+        }else{
+            return null;
+        }
+
+    }
 
 
 }

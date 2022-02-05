@@ -67,7 +67,7 @@ public class ClientRepository implements DAORepositories<Client> {
     }
 
     @Override
-    public List<Client> getByIg(Long id) {
+    public Client getById(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<Client> clients=new LinkedList<Client>() ;
@@ -82,7 +82,7 @@ public class ClientRepository implements DAORepositories<Client> {
             transaction.commit();
         }
         session.close();
-        return clients;
+        return clients.get(0);
     }
 
     @Override

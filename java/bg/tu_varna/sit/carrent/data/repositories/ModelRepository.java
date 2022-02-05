@@ -65,7 +65,7 @@ public class ModelRepository implements DAORepositories<Model>{
     }
 
     @Override
-    public List<Model> getByIg(Long id) {
+    public Model getById(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<Model> models=new LinkedList<Model>() ;
@@ -80,7 +80,7 @@ public class ModelRepository implements DAORepositories<Model>{
             transaction.commit();
         }
         session.close();
-        return models;
+        return models.get(0);
     }
 
     @Override

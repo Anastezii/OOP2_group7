@@ -138,5 +138,38 @@ public class RentService {
         dialogStage.showAndWait();
     }
 
+    public boolean CheckRent(LocalDate dateStartRent, LocalDate dateEndRent, String CarRegNum,
+                           String ClientName){
+
+           if( repository.CheckRent(dateStartRent,dateEndRent)==null){
+               infoboxDate();
+               return false;
+           }
+
+        Cars carsReg=repositoryCars.getCars(CarRegNum);
+        if(carsReg==null){
+            infoboxCar();
+            return false;
+        }
+
+        Client clientForRent=repositoryClient.getClient(ClientName);
+        if(clientForRent==null){
+            infoboxClient();
+            return false;
+        }
+
+
+           return true;
+    }
+
+    private void infoboxDate() {
+        Stage dialogStage=new Stage();
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        VBox vBox=new VBox(new Text("Not correct date of begin or end of lease please check your input."),new Button("Ok"));
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(30));
+        dialogStage.setScene(new Scene(vBox));
+        dialogStage.showAndWait();
+    }
 
 }

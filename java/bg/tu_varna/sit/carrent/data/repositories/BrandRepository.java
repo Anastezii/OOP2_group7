@@ -65,7 +65,7 @@ public class BrandRepository implements DAORepositories<Brand>{
     }
 
     @Override
-    public List<Brand> getByIg(Long id) {
+    public Brand getById(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<Brand> brands=new LinkedList<Brand>() ;
@@ -80,7 +80,7 @@ public class BrandRepository implements DAORepositories<Brand>{
             transaction.commit();
         }
         session.close();
-        return brands;
+        return brands.get(0);
     }
 
     @Override

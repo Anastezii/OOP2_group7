@@ -67,7 +67,7 @@ public class OperatorRepository implements DAORepositories<Operator> {
     }
 
     @Override
-    public List<Operator> getByIg(Long id) {
+    public Operator getById(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<Operator> operators=new LinkedList<Operator>() ;
@@ -82,7 +82,7 @@ public class OperatorRepository implements DAORepositories<Operator> {
             transaction.commit();
         }
         session.close();
-        return operators;
+        return operators.get(0);
     }
 
     @Override

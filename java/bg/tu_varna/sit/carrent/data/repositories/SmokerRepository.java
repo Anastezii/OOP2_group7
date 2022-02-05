@@ -65,7 +65,7 @@ public class SmokerRepository implements DAORepositories<Smoker>{
     }
 
     @Override
-    public List<Smoker> getByIg(Long id) {
+    public Smoker getById(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<Smoker> smokers=new LinkedList<Smoker>() ;
@@ -80,7 +80,7 @@ public class SmokerRepository implements DAORepositories<Smoker>{
             transaction.commit();
         }
         session.close();
-        return smokers;
+        return smokers.get(0);
     }
 
     @Override

@@ -65,7 +65,7 @@ public class CarsRepository implements DAORepositories<Cars>{
     }
 
     @Override
-    public List<Cars> getByIg(Long id) {
+    public Cars getById(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<Cars> cars=new LinkedList<Cars>() ;
@@ -80,7 +80,7 @@ public class CarsRepository implements DAORepositories<Cars>{
             transaction.commit();
         }
         session.close();
-        return cars;
+        return cars.get(0);
     }
 
     @Override

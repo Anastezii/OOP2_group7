@@ -67,7 +67,7 @@ public static UserRepository getInstance(){return UserRepository.UserRepositoryH
     }
 
     @Override
-    public List<User> getByIg(Long id) {
+    public User getById(Long id) {
         Session session= Connection.openSession();
         Transaction transaction=session.beginTransaction();
         List<User> users=new LinkedList<User>() ;
@@ -82,7 +82,7 @@ public static UserRepository getInstance(){return UserRepository.UserRepositoryH
             transaction.commit();
         }
         session.close();
-        return users;
+        return users.get(0);
     }
 
     @Override

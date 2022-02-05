@@ -1,8 +1,12 @@
 package bg.tu_varna.sit.carrent.presentation.controlers;
 
+import bg.tu_varna.sit.carrent.business.services.RentService;
+import bg.tu_varna.sit.carrent.data.entities.Phirma;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,17 +15,21 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 
 public class CheckRentController {
     @FXML
     public TextField InputLogin;
 
     @FXML
-    public ComboBox CarRent;
+    public TextField CarRent;
     @FXML
     public Button CheckRent;
     @FXML
@@ -31,14 +39,32 @@ public class CheckRentController {
     @FXML
     public DatePicker End;
 
+    private final RentService service = RentService.getInstance();
+
     @FXML
     public void initialize() {
         CheckRent.setOnMouseClicked(this::handle);
         BackButton.setOnMouseClicked(this::handle1);
     }
     public void handle(Event event) {
-        System.out.println("Hello");
+        String ClientName=InputLogin.getText().trim();
+        String CarRegNum=CarRent.getText().trim();
+        LocalDate startDateRent=Start.getValue();
+        LocalDate endDateRent=End.getValue();
+       if(!service.CheckRent(startDateRent,endDateRent,CarRegNum,ClientName)){return;}
+        infobox();
     }
+
+    private void infobox() {
+        Stage dialogStage=new Stage();
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        VBox vBox=new VBox(new Text("Your rent is valid."),new Button("Ok"));
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(30));
+        dialogStage.setScene(new Scene(vBox));
+        dialogStage.showAndWait();
+    }
+
     public void handle1(Event event) {
         Parent root;
         try{
@@ -53,4 +79,7 @@ public class CheckRentController {
             e.getCause();
         }
     }
+
+
+
 }
