@@ -17,7 +17,7 @@
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font></Label>
-      <Label layoutX="54.0" layoutY="78.0" text="Please input your login">
+      <Label layoutX="54.0" layoutY="78.0" text="Please input your name">
          <font>
             <Font name="Berlin Sans FB" size="14.0" />
          </font></Label>
@@ -25,11 +25,11 @@
          <font>
             <Font name="Berlin Sans FB" size="14.0" />
          </font></Label>
-      <Label layoutX="54.0" layoutY="192.0" text="Please choose your car">
+      <Label layoutX="54.0" layoutY="192.0" text="Please input reg number of car">
          <font>
             <Font name="Berlin Sans FB" size="14.0" />
          </font></Label>
-      <ComboBox fx:id="CarRent" layoutX="286.0" layoutY="197.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="CarRent" layoutX="286.0" layoutY="197.0" prefHeight="25.0" prefWidth="174.0" />
       <Button fx:id="CheckRent" layoutX="88.0" layoutY="269.0" mnemonicParsing="false" onAction="#handle" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #b0c4de;" text="Check">
          <font>
             <Font name="Berlin Sans FB" size="14.0" />
